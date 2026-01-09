@@ -6,9 +6,17 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  update-feed:
+  update-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v4
@@ -27,18 +35,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: npm run dev
 
-      - name: Commit and push if changed
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-          # Only add feed.xml (database is gitignored)
-          git add -f feed.xml
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
 
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to feed.xml"
-          else
-            git commit -m "Update RSS feed [skip ci]"
-            git push
-          fi
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
