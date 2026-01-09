@@ -1,0 +1,393 @@
+import fs from 'fs';
+import path from 'path';
+import { MergedHeadline } from './types';
+import { getDB } from './db';
+
+const HTML_PATH = path.join(process.cwd(), 'index.html');
+
+export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<void> {
+  const topHeadlines = mergedHeadlines.slice(0, 10);
+  const now = new Date();
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mergelines</title>
+    <link rel="alternate" type="application/rss+xml" title="Mergelines RSS Feed" href="/feed.xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 21px;
+            color: #86868b;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 16px;
+        }
+
+        .rss-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 20px;
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .rss-link:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .stories {
+            display: grid;
+            gap: 20px;
+        }
+
+        .story {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .story.featured::before {
+            opacity: 1;
+        }
+
+        .story:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .story-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #86868b;
+            min-width: 28px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .badge.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge.hn {
+            background: rgba(255, 102, 0, 0.1);
+            color: #ff6600;
+        }
+
+        .badge.tm {
+            background: rgba(0, 122, 255, 0.1);
+            color: #007aff;
+        }
+
+        .story-title {
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .story-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .story-title a:hover {
+            color: #667eea;
+        }
+
+        .story-summary {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #515154;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            border-left: 3px solid #667eea;
+        }
+
+        .story-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .story-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .story-link:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .story-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .story {
+                padding: 24px;
+            }
+
+            .story-title {
+                font-size: 18px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        ${topHeadlines.map((_, i) => `.story:nth-child(${i + 1}) { animation-delay: ${i * 0.05}s; opacity: 0; }`).join('\n        ')}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mergelines</h1>
+            <p class="subtitle">The best of Techmeme and Hacker News</p>
+            <p class="meta">Updated ${now.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            })}</p>
+            <a href="/feed.xml" class="rss-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                </svg>
+                Subscribe to RSS
+            </a>
+        </header>
+
+        <div class="stories">
+${await Promise.all(topHeadlines.map(async (headline, index) => {
+    const number = index + 1;
+    let badgeHTML = '';
+    let summaryHTML = '';
+    let linksHTML = '';
+    let metaHTML = '';
+
+    if (headline.inBothSites) {
+        badgeHTML = '<span class="badge featured">🔥 Both Sites</span>';
+
+        // Get AI summary
+        const db = getDB();
+        const crossPlatformStories = db.getCrossPlatformStories(100);
+        const matchingStory = crossPlatformStories.find(s => s.title === headline.title);
+        if (matchingStory?.summary) {
+            summaryHTML = `<div class="story-summary">${matchingStory.summary}</div>`;
+        }
+
+        linksHTML = `
+                <div class="story-links">
+                    <a href="${headline.urls[0].url}" class="story-link" target="_blank" rel="noopener">
+                        <span>📰</span> Techmeme
+                    </a>
+                    <a href="${headline.urls[1].url}" class="story-link" target="_blank" rel="noopener">
+                        <span>🗨️</span> Hacker News
+                    </a>
+                </div>`;
+
+        if (headline.hackernewsData) {
+            const points = headline.hackernewsData.points || 0;
+            const comments = headline.hackernewsData.commentCount || 0;
+            metaHTML = `
+                <div class="story-meta">
+                    <span class="meta-item">${points} points</span>
+                    <span class="meta-item">${comments} comments</span>
+                </div>`;
+        }
+    } else {
+        const source = headline.urls[0].source;
+        const url = headline.urls[0].url;
+
+        if (source === 'Hacker News') {
+            badgeHTML = '<span class="badge hn">Hacker News</span>';
+            const points = headline.hackernewsData?.points || 0;
+            const comments = headline.hackernewsData?.commentCount || 0;
+
+            linksHTML = `
+                <div class="story-links">
+                    <a href="${url}" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>`;
+
+            metaHTML = `
+                <div class="story-meta">
+                    <span class="meta-item">${points} points</span>
+                    <span class="meta-item">${comments} comments</span>
+                </div>`;
+        } else {
+            badgeHTML = '<span class="badge tm">Techmeme</span>';
+            linksHTML = `
+                <div class="story-links">
+                    <a href="${url}" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>`;
+        }
+    }
+
+    return `            <article class="story${headline.inBothSites ? ' featured' : ''}">
+                <div class="story-header">
+                    <span class="story-number">${number}</span>
+                    ${badgeHTML}
+                </div>
+                <h2 class="story-title">
+                    <a href="${headline.urls[0].url}" target="_blank" rel="noopener">${headline.title}</a>
+                </h2>
+                ${summaryHTML}${linksHTML}${metaHTML}
+            </article>`;
+}))}
+        </div>
+
+        <footer>
+            <p>Mergelines aggregates the top stories from Techmeme and Hacker News</p>
+            <p style="margin-top: 8px; opacity: 0.7;">Updates hourly • <a href="/feed.xml" style="color: inherit;">RSS Feed</a></p>
+        </footer>
+    </div>
+</body>
+</html>`;
+
+  fs.writeFileSync(HTML_PATH, html, 'utf-8');
+  console.log(`✓ HTML page written to ${HTML_PATH}`);
+}

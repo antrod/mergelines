@@ -3,51 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mergelines - Cross-Platform Tech News</title>
+    <title>Mergelines</title>
+    <link rel="alternate" type="application/rss+xml" title="Mergelines RSS Feed" href="/feed.xml">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1d1d1f;
             line-height: 1.6;
         }
-        h1 { color: #333; }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 21px;
+            color: #86868b;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .meta {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 16px;
+        }
+
         .rss-link {
-            display: inline-block;
-            background: #ff6600;
-            color: white;
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 20px;
             text-decoration: none;
-            border-radius: 5px;
-            margin: 20px 0;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
+
         .rss-link:hover {
-            background: #ff8533;
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
         }
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
+
+        .stories {
+            display: grid;
+            gap: 20px;
         }
+
+        .story {
+            background: white;
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .story.featured::before {
+            opacity: 1;
+        }
+
+        .story:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .story-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: #86868b;
+            min-width: 28px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .badge.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .badge.hn {
+            background: rgba(255, 102, 0, 0.1);
+            color: #ff6600;
+        }
+
+        .badge.tm {
+            background: rgba(0, 122, 255, 0.1);
+            color: #007aff;
+        }
+
+        .story-title {
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .story-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .story-title a:hover {
+            color: #667eea;
+        }
+
+        .story-summary {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #515154;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            border-left: 3px solid #667eea;
+        }
+
+        .story-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .story-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #1d1d1f;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .story-link:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .story-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: #86868b;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            color: #86868b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .story {
+                padding: 24px;
+            }
+
+            .story-title {
+                font-size: 18px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .story {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .story:nth-child(1) { animation-delay: 0s; opacity: 0; }
+        .story:nth-child(2) { animation-delay: 0.05s; opacity: 0; }
+        .story:nth-child(3) { animation-delay: 0.1s; opacity: 0; }
+        .story:nth-child(4) { animation-delay: 0.15000000000000002s; opacity: 0; }
+        .story:nth-child(5) { animation-delay: 0.2s; opacity: 0; }
+        .story:nth-child(6) { animation-delay: 0.25s; opacity: 0; }
+        .story:nth-child(7) { animation-delay: 0.30000000000000004s; opacity: 0; }
+        .story:nth-child(8) { animation-delay: 0.35000000000000003s; opacity: 0; }
+        .story:nth-child(9) { animation-delay: 0.4s; opacity: 0; }
+        .story:nth-child(10) { animation-delay: 0.45s; opacity: 0; }
     </style>
 </head>
 <body>
-    <h1>🔥 Mergelines</h1>
-    <p>Tech stories that appear on both <strong>Techmeme</strong> and <strong>Hacker News</strong> within a 12-hour window.</p>
+    <div class="container">
+        <header>
+            <h1>Mergelines</h1>
+            <p class="subtitle">The best of Techmeme and Hacker News</p>
+            <p class="meta">Updated Jan 9, 2026, 6:54 PM</p>
+            <a href="/feed.xml" class="rss-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                </svg>
+                Subscribe to RSS
+            </a>
+        </header>
 
-    <a href="feed.xml" class="rss-link">📡 Subscribe to RSS Feed</a>
+        <div class="stories">
+            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">1</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://mathstodon.xyz/@tao/115855840223258103" target="_blank" rel="noopener">AI solves Erdos problem #728 (Terence Tao mathstodon post)</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://mathstodon.xyz/@tao/115855840223258103" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">80 points</span>
+                    <span class="meta-item">0 comments</span>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">2</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews" target="_blank" rel="noopener">Google rolls out an AI Inbox view for Gmail that shows users to-dos and summaries of topics rather than a traditional email list, first for US “trusted testers”</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">3</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://github.com/denoland/deno/issues/31254" target="_blank" rel="noopener">Deno has made its PyPI distribution official</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://github.com/denoland/deno/issues/31254" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">7 points</span>
+                    <span class="meta-item">0 comments</span>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">4</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175" target="_blank" rel="noopener">Microsoft debuts Copilot Checkout in the US, enabling in-chat purchases via PayPal, Shopify, Stripe, and more; Shopify merchants will be automatically enrolled</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">5</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/" target="_blank" rel="noopener">QtNat – Open you port with Qt UPnP</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">33 points</span>
+                    <span class="meta-item">0 comments</span>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">6</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai" target="_blank" rel="noopener">OpenAI launches a HIPAA-compliant version of ChatGPT for clinicians to help with medical reasoning and reduce administrative work, at Cedars-Sinai and elsewhere</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">7</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/" target="_blank" rel="noopener">RTX 5090 and Raspberry Pi: Can It Game?</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">96 points</span>
+                    <span class="meta-item">0 comments</span>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">8</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&reflink=desktopwebshare_permalink" target="_blank" rel="noopener">Nvidia has hired Google Cloud VP of Marketing Alison Wagonfeld to be Nvidia's first CMO, starting in February; source: Wagonfeld will report to CEO Jensen Huang</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&reflink=desktopwebshare_permalink" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">9</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.donutthejedi.com/" target="_blank" rel="noopener">Show HN: Rocket Launch and Orbit Simulator</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.donutthejedi.com/" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">77 points</span>
+                    <span class="meta-item">0 comments</span>
+                </div>
+            </article>,            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">10</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/" target="_blank" rel="noopener">Seattle-based Spangle AI, which offers AI tools for online retailers to generate custom storefronts, raised a $15M Series A led by NewRoad at a $100M valuation</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>
+        </div>
 
-    <h2>How to use</h2>
-    <p>Copy this URL into your RSS reader:</p>
-    <code id="feed-url"></code>
-
-    <h2>About</h2>
-    <p>This feed aggregates tech news headlines from Techmeme and Hacker News, using AI to generate summaries for stories that appear on both platforms. Updated hourly.</p>
-
-    <script>
-        const feedUrl = window.location.origin + '/feed.xml';
-        document.getElementById('feed-url').textContent = feedUrl;
-    </script>
+        <footer>
+            <p>Mergelines aggregates the top stories from Techmeme and Hacker News</p>
+            <p style="margin-top: 8px; opacity: 0.7;">Updates hourly • <a href="/feed.xml" style="color: inherit;">RSS Feed</a></p>
+        </footer>
+    </div>
 </body>
 </html>

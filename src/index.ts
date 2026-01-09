@@ -4,6 +4,7 @@ import { scrapeTechmeme } from './scrapers/techmeme';
 import { scrapeHackerNews } from './scrapers/hackernews';
 import { storeAndMatchHeadlines } from './persistence-merger';
 import { writeRSSFeed, getRSSFeedPath } from './rss';
+import { generateHTML } from './html-generator';
 import { closeDB } from './db';
 
 // Load environment variables
@@ -48,10 +49,14 @@ async function main() {
       console.log(chalk.gray(`No new cross-platform stories found.\n`));
     }
 
-    // Generate RSS feed (always, with top 10 stories)
+    // Generate RSS feed and HTML page (always, with top 10 stories)
     console.log(chalk.cyan('📡 Generating RSS feed with top 10 stories...'));
     await writeRSSFeed(mergedHeadlines);
-    console.log(chalk.green(`✓ RSS feed available at: ${getRSSFeedPath()}\n`));
+    console.log(chalk.green(`✓ RSS feed available at: ${getRSSFeedPath()}`));
+
+    console.log(chalk.cyan('🎨 Generating HTML page...'));
+    await generateHTML(mergedHeadlines);
+    console.log(chalk.green(`✓ HTML page generated\n`));
 
     console.log(chalk.bold.yellow('📰 Top Headlines:\n'));
     console.log(chalk.gray('─'.repeat(80)) + '\n');
