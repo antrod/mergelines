@@ -1,0 +1,30 @@
+{
+  "name": "mergelines",
+  "version": "1.0.0",
+  "description": "Aggregates and ranks headlines from Techmeme and Hacker News",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "news",
+    "aggregator",
+    "techmeme",
+    "hackernews"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "chalk": "^5.6.2",
+    "cheerio": "^1.1.2"
+  }
+}
