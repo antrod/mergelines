@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Mergelines - Cross-Platform Tech News]]></title>
+        <description><![CDATA[Tech stories that appeared on both Techmeme and Hacker News]]></description>
+        <link>https://yoursite.com</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Fri, 09 Jan 2026 21:47:20 GMT</lastBuildDate>
+        <atom:link href="https://yoursite.com/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Fri, 09 Jan 2026 21:47:20 GMT</pubDate>
+        <language><![CDATA[en]]></language>
+        <ttl>60</ttl>
+        <item>
+            <title><![CDATA[The UK government says X restricting Grok's image creation to paid users is insulting as it just makes the ability to generate unlawful images a premium service]]></title>
+            <description><![CDATA[
+      <p>The UK government has criticized X for limiting Grok's image creation feature to paid users, labeling the move as insulting and suggesting it effectively turns the ability to generate potentially unlawful images into a premium service. This raises concerns about accessibility and the implications of monetizing such capabilities.</p>
+      <p><strong>Sources:</strong></p>
+      <ul>
+        <li><a href="https://www.theguardian.com/technology/2026/jan/09/no-10-condemns-move-by-x-to-restrict-grok-ai-image-creation-tool-as-insulting">Techmeme</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/London%E2%80%93Calcutta_bus_service">Hacker News</a> (300 points, 0 comments)</li>
+      </ul>
+    ]]></description>
+            <link>https://www.theguardian.com/technology/2026/jan/09/no-10-condemns-move-by-x-to-restrict-grok-ai-image-creation-tool-as-insulting</link>
+            <guid isPermaLink="true">https://www.theguardian.com/technology/2026/jan/09/no-10-condemns-move-by-x-to-restrict-grok-ai-image-creation-tool-as-insulting</guid>
+            <pubDate>Fri, 09 Jan 2026 21:47:20 GMT</pubDate>
+            <techmeme:url>https://www.theguardian.com/technology/2026/jan/09/no-10-condemns-move-by-x-to-restrict-grok-ai-image-creation-tool-as-insulting</techmeme:url>
+            <hn:url>https://en.wikipedia.org/wiki/London%E2%80%93Calcutta_bus_service</hn:url>
+            <hn:points>300</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+    </channel>
+</rss>

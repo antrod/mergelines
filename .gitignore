@@ -32,5 +32,4 @@ yarn-error.log*
 *.db
 *.db-journal
 
-# RSS Feed
-feed.xml
+# RSS Feed - keep feed.xml in repo for GitHub Pages
