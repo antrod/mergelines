@@ -189,10 +189,13 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  // Add unmatched Techmeme stories
+  // Collect unmatched stories
+  const unmatchedTM: MergedHeadline[] = [];
+  const unmatchedHN: MergedHeadline[] = [];
+
   for (const tmStored of techmemeInWindow) {
     if (!processedTM.has(tmStored.id)) {
-      merged.push({
+      unmatchedTM.push({
         title: tmStored.title,
         urls: [{ source: 'Techmeme', url: tmStored.url }],
         inBothSites: false,
@@ -203,10 +206,9 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  // Add unmatched HN stories
   for (const hnStored of hnInWindow) {
     if (!processedHNDisplay.has(hnStored.id)) {
-      merged.push({
+      unmatchedHN.push({
         title: hnStored.title,
         urls: [{ source: 'Hacker News', url: hnStored.url }],
         inBothSites: false,
@@ -217,13 +219,31 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  // Sort by cross-platform first, then popularity
-  merged.sort((a, b) => {
-    if (a.inBothSites !== b.inBothSites) {
-      return a.inBothSites ? -1 : 1;
+  // Deduplicate Techmeme stories (peel apart stories about same topic)
+  const dedupedTM: MergedHeadline[] = [];
+  for (const tm of unmatchedTM) {
+    let isDuplicate = false;
+    for (const existing of dedupedTM) {
+      if (similarity(tm.title, existing.title) > 0.5) {
+        isDuplicate = true;
+        break;
+      }
     }
-    return b.popularity - a.popularity;
-  });
+    if (!isDuplicate) {
+      dedupedTM.push(tm);
+    }
+  }
+
+  // Interleave HN and deduplicated Techmeme stories
+  const maxLength = Math.max(dedupedTM.length, unmatchedHN.length);
+  for (let i = 0; i < maxLength; i++) {
+    if (i < unmatchedHN.length) {
+      merged.push(unmatchedHN[i]);
+    }
+    if (i < dedupedTM.length) {
+      merged.push(dedupedTM[i]);
+    }
+  }
 
   return {
     stored: { techmeme: techmemeIds.length, hackernews: hnIds.length },

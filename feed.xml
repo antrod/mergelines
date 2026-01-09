@@ -1,13 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title><![CDATA[Mergelines - Cross-Platform Tech News]]></title>
-        <description><![CDATA[Tech stories that appeared on both Techmeme and Hacker News]]></description>
+        <title><![CDATA[Mergelines - Top Tech News]]></title>
+        <description><![CDATA[Top tech stories from Techmeme and Hacker News, featuring cross-platform matches]]></description>
         <link>https://yoursite.com</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 09 Jan 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 09 Jan 2026 23:50:46 GMT</lastBuildDate>
         <atom:link href="https://yoursite.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Fri, 09 Jan 2026 00:00:00 GMT</pubDate>
+        <pubDate>Fri, 09 Jan 2026 23:50:46 GMT</pubDate>
         <language><![CDATA[en]]></language>
         <ttl>60</ttl>
+        <item>
+            <title><![CDATA[AI solves Erdos problem #728 (Terence Tao mathstodon post)]]></title>
+            <description><![CDATA[
+          <p><strong>From Hacker News</strong></p>
+          <p>80 points • 0 comments</p>
+          <p><a href="https://mathstodon.xyz/@tao/115855840223258103">Read on Hacker News</a></p>
+        ]]></description>
+            <link>https://mathstodon.xyz/@tao/115855840223258103</link>
+            <guid isPermaLink="true">https://mathstodon.xyz/@tao/115855840223258103</guid>
+            <pubDate>Fri, 09 Jan 2026 22:39:15 GMT</pubDate>
+            <hn:url>https://mathstodon.xyz/@tao/115855840223258103</hn:url>
+            <hn:points>80</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+        <item>
+            <title><![CDATA[Google rolls out an AI Inbox view for Gmail that shows users to-dos and summaries of topics rather than a traditional email list, first for US “trusted testers”]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews</link>
+            <guid isPermaLink="true">https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews</guid>
+            <pubDate>Fri, 09 Jan 2026 23:50:45 GMT</pubDate>
+            <techmeme:url>https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[Deno has made its PyPI distribution official]]></title>
+            <description><![CDATA[
+          <p><strong>From Hacker News</strong></p>
+          <p>7 points • 0 comments</p>
+          <p><a href="https://github.com/denoland/deno/issues/31254">Read on Hacker News</a></p>
+        ]]></description>
+            <link>https://github.com/denoland/deno/issues/31254</link>
+            <guid isPermaLink="true">https://github.com/denoland/deno/issues/31254</guid>
+            <pubDate>Fri, 09 Jan 2026 21:41:27 GMT</pubDate>
+            <hn:url>https://github.com/denoland/deno/issues/31254</hn:url>
+            <hn:points>7</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+        <item>
+            <title><![CDATA[Microsoft debuts Copilot Checkout in the US, enabling in-chat purchases via PayPal, Shopify, Stripe, and more; Shopify merchants will be automatically enrolled]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175</link>
+            <guid isPermaLink="true">https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175</guid>
+            <pubDate>Fri, 09 Jan 2026 23:50:45 GMT</pubDate>
+            <techmeme:url>https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[QtNat – Open you port with Qt UPnP]]></title>
+            <description><![CDATA[
+          <p><strong>From Hacker News</strong></p>
+          <p>33 points • 0 comments</p>
+          <p><a href="http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/">Read on Hacker News</a></p>
+        ]]></description>
+            <link>http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/</link>
+            <guid isPermaLink="true">http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/</guid>
+            <pubDate>Fri, 09 Jan 2026 20:17:07 GMT</pubDate>
+            <hn:url>http://renaudguezennec.eu/index.php/2026/01/09/qtnat-open-you-port-with-qt/</hn:url>
+            <hn:points>33</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+        <item>
+            <title><![CDATA[OpenAI launches a HIPAA-compliant version of ChatGPT for clinicians to help with medical reasoning and reduce administrative work, at Cedars-Sinai and elsewhere]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</link>
+            <guid isPermaLink="true">https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</guid>
+            <pubDate>Fri, 09 Jan 2026 23:50:45 GMT</pubDate>
+            <techmeme:url>https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[RTX 5090 and Raspberry Pi: Can It Game?]]></title>
+            <description><![CDATA[
+          <p><strong>From Hacker News</strong></p>
+          <p>96 points • 0 comments</p>
+          <p><a href="https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/">Read on Hacker News</a></p>
+        ]]></description>
+            <link>https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/</link>
+            <guid isPermaLink="true">https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/</guid>
+            <pubDate>Fri, 09 Jan 2026 19:33:47 GMT</pubDate>
+            <hn:url>https://scottjg.com/posts/2026-01-08-crappy-computer-showdown/</hn:url>
+            <hn:points>96</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+        <item>
+            <title><![CDATA[Nvidia has hired Google Cloud VP of Marketing Alison Wagonfeld to be Nvidia's first CMO, starting in February; source: Wagonfeld will report to CEO Jensen Huang]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&reflink=desktopwebshare_permalink">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&amp;reflink=desktopwebshare_permalink</link>
+            <guid isPermaLink="true">https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&amp;reflink=desktopwebshare_permalink</guid>
+            <pubDate>Fri, 09 Jan 2026 23:50:45 GMT</pubDate>
+            <techmeme:url>https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&amp;reflink=desktopwebshare_permalink</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[Show HN: Rocket Launch and Orbit Simulator]]></title>
+            <description><![CDATA[
+          <p><strong>From Hacker News</strong></p>
+          <p>77 points • 0 comments</p>
+          <p><a href="https://www.donutthejedi.com/">Read on Hacker News</a></p>
+        ]]></description>
+            <link>https://www.donutthejedi.com/</link>
+            <guid isPermaLink="true">https://www.donutthejedi.com/</guid>
+            <pubDate>Fri, 09 Jan 2026 19:15:21 GMT</pubDate>
+            <hn:url>https://www.donutthejedi.com/</hn:url>
+            <hn:points>77</hn:points>
+            <hn:comments>0</hn:comments>
+        </item>
+        <item>
+            <title><![CDATA[Seattle-based Spangle AI, which offers AI tools for online retailers to generate custom storefronts, raised a $15M Series A led by NewRoad at a $100M valuation]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/</link>
+            <guid isPermaLink="true">https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/</guid>
+            <pubDate>Fri, 09 Jan 2026 23:50:45 GMT</pubDate>
+            <techmeme:url>https://www.geekwire.com/2026/former-amazon-execs-raise-15m-for-agentic-commerce-startup-that-uses-ai-to-generate-custom-storefronts/</techmeme:url>
+        </item>
     </channel>
 </rss>

@@ -44,14 +44,14 @@ async function main() {
     console.log(chalk.green(`✓ Stored ${stored.techmeme} Techmeme + ${stored.hackernews} HN headlines`));
     if (newMatches > 0) {
       console.log(chalk.bold.green(`🎉 Found ${newMatches} new cross-platform ${newMatches === 1 ? 'story' : 'stories'}!\n`));
-
-      // Generate RSS feed
-      console.log(chalk.cyan('📡 Generating RSS feed...'));
-      await writeRSSFeed();
-      console.log(chalk.green(`✓ RSS feed available at: ${getRSSFeedPath()}\n`));
     } else {
       console.log(chalk.gray(`No new cross-platform stories found.\n`));
     }
+
+    // Generate RSS feed (always, with top 10 stories)
+    console.log(chalk.cyan('📡 Generating RSS feed with top 10 stories...'));
+    await writeRSSFeed(mergedHeadlines);
+    console.log(chalk.green(`✓ RSS feed available at: ${getRSSFeedPath()}\n`));
 
     console.log(chalk.bold.yellow('📰 Top Headlines:\n'));
     console.log(chalk.gray('─'.repeat(80)) + '\n');

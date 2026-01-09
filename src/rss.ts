@@ -61,14 +61,11 @@ Summary:`
   }
 }
 
-// Generate RSS feed from cross-platform stories
-export async function generateRSSFeed(): Promise<string> {
-  const db = getDB();
-  const stories = db.getCrossPlatformStories(50);
-
+// Generate RSS feed from merged headlines (top 10)
+export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
   const feed = new RSS({
-    title: 'Mergelines - Cross-Platform Tech News',
-    description: 'Tech stories that appeared on both Techmeme and Hacker News',
+    title: 'Mergelines - Top Tech News',
+    description: 'Top tech stories from Techmeme and Hacker News, featuring cross-platform matches',
     feed_url: 'https://yoursite.com/feed.xml',
     site_url: 'https://yoursite.com',
     language: 'en',
@@ -76,36 +73,68 @@ export async function generateRSSFeed(): Promise<string> {
     ttl: 60,
   });
 
-  for (const story of stories) {
-    const details = db.getCrossPlatformStoryDetails(story.id);
-    if (!details) continue;
+  // Take top 10 headlines
+  const topHeadlines = mergedHeadlines.slice(0, 10);
 
-    const { techmeme, hackernews } = details;
+  for (const headline of topHeadlines) {
+    let itemDescription = '';
+    let primaryUrl = '';
+    const customElements: any[] = [];
 
-    // Use story summary or title
-    const description = story.summary || story.title;
+    if (headline.inBothSites) {
+      // Cross-platform story - fetch summary from DB
+      const db = getDB();
+      const crossPlatformStories = db.getCrossPlatformStories(100);
+      const matchingStory = crossPlatformStories.find(s => s.title === headline.title);
+      const summary = matchingStory?.summary || headline.title;
 
-    // Create item with links to both sources
-    const itemDescription = `
-      <p>${description}</p>
-      <p><strong>Sources:</strong></p>
-      <ul>
-        <li><a href="${techmeme.url}">Techmeme</a></li>
-        <li><a href="${hackernews.url}">Hacker News</a> (${hackernews.points || 0} points, ${hackernews.commentCount || 0} comments)</li>
-      </ul>
-    `;
+      itemDescription = `
+        <p><strong>🔥 Featured on both Techmeme and Hacker News</strong></p>
+        <p>${summary}</p>
+        <p><strong>Sources:</strong></p>
+        <ul>
+          <li><a href="${headline.urls[0].url}">Techmeme</a></li>
+          <li><a href="${headline.urls[1].url}">Hacker News</a> (${headline.hackernewsData?.points || 0} points, ${headline.hackernewsData?.commentCount || 0} comments)</li>
+        </ul>
+      `;
+      primaryUrl = headline.urls[0].url;
+      customElements.push(
+        { 'techmeme:url': headline.urls[0].url },
+        { 'hn:url': headline.urls[1].url },
+        { 'hn:points': headline.hackernewsData?.points?.toString() || '0' },
+        { 'hn:comments': headline.hackernewsData?.commentCount?.toString() || '0' }
+      );
+    } else {
+      // Single-source story
+      const source = headline.urls[0].source;
+      primaryUrl = headline.urls[0].url;
+
+      if (source === 'Hacker News') {
+        itemDescription = `
+          <p><strong>From Hacker News</strong></p>
+          <p>${headline.hackernewsData?.points || 0} points • ${headline.hackernewsData?.commentCount || 0} comments</p>
+          <p><a href="${primaryUrl}">Read on Hacker News</a></p>
+        `;
+        customElements.push(
+          { 'hn:url': primaryUrl },
+          { 'hn:points': headline.hackernewsData?.points?.toString() || '0' },
+          { 'hn:comments': headline.hackernewsData?.commentCount?.toString() || '0' }
+        );
+      } else {
+        itemDescription = `
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="${primaryUrl}">Read on Techmeme</a></p>
+        `;
+        customElements.push({ 'techmeme:url': primaryUrl });
+      }
+    }
 
     feed.item({
-      title: story.title,
+      title: headline.title,
       description: itemDescription,
-      url: techmeme.url, // Use Techmeme as primary link
-      date: new Date(story.matched_at),
-      custom_elements: [
-        { 'techmeme:url': techmeme.url },
-        { 'hn:url': hackernews.url },
-        { 'hn:points': hackernews.points?.toString() || '0' },
-        { 'hn:comments': hackernews.commentCount?.toString() || '0' },
-      ],
+      url: primaryUrl,
+      date: headline.timestamp,
+      custom_elements: customElements,
     });
   }
 
@@ -113,8 +142,8 @@ export async function generateRSSFeed(): Promise<string> {
 }
 
 // Write RSS feed to file
-export async function writeRSSFeed(): Promise<void> {
-  const xml = await generateRSSFeed();
+export async function writeRSSFeed(mergedHeadlines: any[]): Promise<void> {
+  const xml = await generateRSSFeed(mergedHeadlines);
   fs.writeFileSync(FEED_PATH, xml, 'utf-8');
   console.log(`\n✓ RSS feed written to ${FEED_PATH}`);
 }
