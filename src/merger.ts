@@ -36,20 +36,45 @@ function levenshteinDistance(s1: string, s2: string): number {
   return costs[s2.length];
 }
 
+// Extract domain from URL
+function extractDomain(url: string): string {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.hostname.replace('www.', '');
+  } catch {
+    return '';
+  }
+}
+
+// Common stop words that don't help with matching
+const STOP_WORDS = new Set(['with', 'from', 'that', 'this', 'have', 'will', 'after', 'about', 'says', 'their', 'more', 'than', 'into', 'over', 'some', 'been']);
+
 // Check if two headlines are about the same story
 function isSameStory(h1: Headline, h2: Headline): boolean {
-  // Check title similarity (threshold of 0.6 - 60% similar)
-  const titleSim = similarity(h1.title, h2.title);
-  if (titleSim > 0.6) return true;
+  // Check if both link to the same domain (strong signal)
+  const domain1 = extractDomain(h1.url);
+  const domain2 = extractDomain(h2.url);
+  if (domain1 && domain2 && domain1 === domain2) {
+    return true;
+  }
 
-  // Check if they share significant words
-  const words1 = h1.title.toLowerCase().split(/\s+/).filter(w => w.length > 3);
-  const words2 = h2.title.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+  // Check title similarity (lowered threshold to 0.45 - 45% similar)
+  const titleSim = similarity(h1.title, h2.title);
+  if (titleSim > 0.45) return true;
+
+  // Check if they share significant words (excluding stop words)
+  const words1 = h1.title.toLowerCase()
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !STOP_WORDS.has(w));
+  const words2 = h2.title.toLowerCase()
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !STOP_WORDS.has(w));
 
   const sharedWords = words1.filter(w => words2.includes(w));
   const minWords = Math.min(words1.length, words2.length);
 
-  if (minWords > 0 && sharedWords.length / minWords > 0.5) {
+  // Lowered threshold to 0.35 (35% word overlap)
+  if (minWords > 0 && sharedWords.length / minWords > 0.35) {
     return true;
   }
 
@@ -57,7 +82,8 @@ function isSameStory(h1: Headline, h2: Headline): boolean {
 }
 
 // Check if headlines are within time window
-function withinTimeWindow(h1: Headline, h2: Headline, hoursWindow: number = 4): boolean {
+// Default 24 hours since Techmeme uses scrape time, not article publish time
+function withinTimeWindow(h1: Headline, h2: Headline, hoursWindow: number = 24): boolean {
   const timeDiff = Math.abs(h1.timestamp.getTime() - h2.timestamp.getTime());
   const hoursDiff = timeDiff / (1000 * 60 * 60);
   return hoursDiff <= hoursWindow;

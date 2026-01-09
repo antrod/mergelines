@@ -15,13 +15,25 @@ export async function scrapeTechmeme(): Promise<Headline[]> {
     const timestamp = new Date();
 
     // Techmeme structure: headlines are in elements with class "ii"
-    // Try different selectors to find links
+    // Filter out navigation links and non-article content
     $('.ii a').each((_, element) => {
       const titleLink = $(element);
       const title = titleLink.text().trim();
       const url = titleLink.attr('href') || '';
 
-      if (title && url) {
+      // Skip if:
+      // - Title is "Find" or other navigation text
+      // - URL is an internal anchor link
+      // - URL is a sponsored/ad link
+      // - Title is too short (likely navigation)
+      if (
+        title &&
+        url &&
+        title !== 'Find' &&
+        !url.startsWith('#') &&
+        !url.includes('/r2/') && // Sponsored links
+        title.length > 10 // Meaningful headlines are longer
+      ) {
         headlines.push({
           title,
           url: url.startsWith('http') ? url : `https://www.techmeme.com${url}`,
