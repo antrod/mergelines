@@ -27,3 +27,10 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Database
+*.db
+*.db-journal
+
+# RSS Feed
+feed.xml

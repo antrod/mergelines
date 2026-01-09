@@ -2,10 +2,14 @@ import chalk from 'chalk';
 import * as dotenv from 'dotenv';
 import { scrapeTechmeme } from './scrapers/techmeme';
 import { scrapeHackerNews } from './scrapers/hackernews';
-import { mergeAndRankHeadlines, mergeAndRankHeadlinesWithAI } from './merger';
+import { storeAndMatchHeadlines } from './persistence-merger';
+import { writeRSSFeed, getRSSFeedPath } from './rss';
+import { closeDB } from './db';
 
 // Load environment variables
 dotenv.config();
+
+const TIME_WINDOW_HOURS = 12;
 
 async function main() {
   console.log(chalk.bold.cyan('\n🔄 Mergelines - Tech News Aggregator\n'));
@@ -25,14 +29,29 @@ async function main() {
     const useAI = !!process.env.OPENAI_API_KEY;
 
     if (!useAI) {
-      console.log(chalk.yellow('⚠️  No OpenAI API key found. Using string-based matching.'));
-      console.log(chalk.yellow('   Set OPENAI_API_KEY in .env for AI-powered matching.\n'));
+      console.log(chalk.yellow('⚠️  No OpenAI API key found. Summaries will be basic.'));
+      console.log(chalk.yellow('   Set OPENAI_API_KEY in .env for AI-generated summaries.\n'));
     }
 
-    // Merge and rank with AI or fallback to string matching
-    const mergedHeadlines = useAI
-      ? await mergeAndRankHeadlinesWithAI(techmemeHeadlines, hnHeadlines)
-      : mergeAndRankHeadlines(techmemeHeadlines, hnHeadlines);
+    // Store headlines and find matches within 12-hour window
+    console.log(chalk.cyan(`🕐 Using ${TIME_WINDOW_HOURS}-hour time window for matching...`));
+    const { stored, newMatches, allMerged: mergedHeadlines } = await storeAndMatchHeadlines(
+      techmemeHeadlines,
+      hnHeadlines,
+      TIME_WINDOW_HOURS
+    );
+
+    console.log(chalk.green(`✓ Stored ${stored.techmeme} Techmeme + ${stored.hackernews} HN headlines`));
+    if (newMatches > 0) {
+      console.log(chalk.bold.green(`🎉 Found ${newMatches} new cross-platform ${newMatches === 1 ? 'story' : 'stories'}!\n`));
+
+      // Generate RSS feed
+      console.log(chalk.cyan('📡 Generating RSS feed...'));
+      await writeRSSFeed();
+      console.log(chalk.green(`✓ RSS feed available at: ${getRSSFeedPath()}\n`));
+    } else {
+      console.log(chalk.gray(`No new cross-platform stories found.\n`));
+    }
 
     console.log(chalk.bold.yellow('📰 Top Headlines:\n'));
     console.log(chalk.gray('─'.repeat(80)) + '\n');
@@ -71,11 +90,15 @@ async function main() {
 
     console.log(chalk.gray('─'.repeat(80)));
     console.log(chalk.cyan(`\n✨ Total: ${mergedHeadlines.length} headlines`));
-    console.log(chalk.cyan(`   ${mergedHeadlines.filter(h => h.inBothSites).length} stories on both sites\n`));
+    console.log(chalk.cyan(`   ${mergedHeadlines.filter(h => h.inBothSites).length} stories on both sites`));
+    console.log(chalk.gray(`   (within ${TIME_WINDOW_HOURS}-hour window)\n`));
 
   } catch (error) {
     console.error(chalk.red('Error:'), error);
+    closeDB();
     process.exit(1);
+  } finally {
+    closeDB();
   }
 }
 
