@@ -1,7 +1,11 @@
 import chalk from 'chalk';
+import * as dotenv from 'dotenv';
 import { scrapeTechmeme } from './scrapers/techmeme';
 import { scrapeHackerNews } from './scrapers/hackernews';
-import { mergeAndRankHeadlines } from './merger';
+import { mergeAndRankHeadlines, mergeAndRankHeadlinesWithAI } from './merger';
+
+// Load environment variables
+dotenv.config();
 
 async function main() {
   console.log(chalk.bold.cyan('\n🔄 Mergelines - Tech News Aggregator\n'));
@@ -17,8 +21,18 @@ async function main() {
     console.log(chalk.green(`✓ Fetched ${techmemeHeadlines.length} headlines from Techmeme`));
     console.log(chalk.green(`✓ Fetched ${hnHeadlines.length} headlines from Hacker News\n`));
 
-    // Merge and rank
-    const mergedHeadlines = mergeAndRankHeadlines(techmemeHeadlines, hnHeadlines);
+    // Check if OpenAI API key is available
+    const useAI = !!process.env.OPENAI_API_KEY;
+
+    if (!useAI) {
+      console.log(chalk.yellow('⚠️  No OpenAI API key found. Using string-based matching.'));
+      console.log(chalk.yellow('   Set OPENAI_API_KEY in .env for AI-powered matching.\n'));
+    }
+
+    // Merge and rank with AI or fallback to string matching
+    const mergedHeadlines = useAI
+      ? await mergeAndRankHeadlinesWithAI(techmemeHeadlines, hnHeadlines)
+      : mergeAndRankHeadlines(techmemeHeadlines, hnHeadlines);
 
     console.log(chalk.bold.yellow('📰 Top Headlines:\n'));
     console.log(chalk.gray('─'.repeat(80)) + '\n');

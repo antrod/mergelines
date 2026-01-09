@@ -1,4 +1,5 @@
 import { Headline, MergedHeadline } from './types';
+import { aiMatchStoriesBatch } from './ai-matcher';
 
 // Simple string similarity function using Levenshtein distance
 function similarity(s1: string, s2: string): number {
@@ -89,6 +90,7 @@ function withinTimeWindow(h1: Headline, h2: Headline, hoursWindow: number = 24):
   return hoursDiff <= hoursWindow;
 }
 
+// String-based matching (fallback method)
 export function mergeAndRankHeadlines(
   techmemeHeadlines: Headline[],
   hnHeadlines: Headline[]
@@ -160,6 +162,124 @@ export function mergeAndRankHeadlines(
       return a.inBothSites ? -1 : 1; // Stories on both sites come first
     }
     return b.popularity - a.popularity; // Higher popularity first
+  });
+
+  return merged;
+}
+
+// AI-powered matching (primary method)
+export async function mergeAndRankHeadlinesWithAI(
+  techmemeHeadlines: Headline[],
+  hnHeadlines: Headline[]
+): Promise<MergedHeadline[]> {
+  const merged: MergedHeadline[] = [];
+  const processedHN = new Set<number>();
+  const processedTM = new Set<number>();
+
+  console.log('\n🤖 Using AI-powered story matching...\n');
+
+  // Use AI to find matches between top stories
+  const aiMatches = await aiMatchStoriesBatch(techmemeHeadlines, hnHeadlines);
+
+  // Create a map for quick lookup
+  const tmToHnMap = new Map<string, Headline>();
+  const hnToTmMap = new Map<string, Headline>();
+
+  // Process AI matches
+  for (const [tmKey, hnKey] of aiMatches.entries()) {
+    const tmHeadline = techmemeHeadlines.find(
+      h => `${h.title}-${h.url}` === tmKey
+    );
+    const hnHeadline = hnHeadlines.find(
+      h => `${h.title}-${h.url}` === hnKey
+    );
+
+    if (tmHeadline && hnHeadline) {
+      merged.push({
+        title: tmHeadline.title,
+        urls: [
+          { source: 'Techmeme', url: tmHeadline.url },
+          { source: 'Hacker News', url: hnHeadline.url }
+        ],
+        inBothSites: true,
+        timestamp: new Date(Math.min(tmHeadline.timestamp.getTime(), hnHeadline.timestamp.getTime())),
+        popularity: (tmHeadline.popularity || 0) + (hnHeadline.popularity || 0),
+        techmemeData: tmHeadline,
+        hackernewsData: hnHeadline
+      });
+
+      processedTM.add(techmemeHeadlines.indexOf(tmHeadline));
+      processedHN.add(hnHeadlines.indexOf(hnHeadline));
+    }
+  }
+
+  // Fallback to string-based matching for remaining stories
+  for (let i = 0; i < techmemeHeadlines.length; i++) {
+    if (processedTM.has(i)) continue;
+
+    const tmHeadline = techmemeHeadlines[i];
+    let matched = false;
+
+    for (let j = 0; j < hnHeadlines.length; j++) {
+      if (processedHN.has(j)) continue;
+
+      const hnHeadline = hnHeadlines[j];
+
+      if (isSameStory(tmHeadline, hnHeadline) && withinTimeWindow(tmHeadline, hnHeadline)) {
+        merged.push({
+          title: tmHeadline.title,
+          urls: [
+            { source: 'Techmeme', url: tmHeadline.url },
+            { source: 'Hacker News', url: hnHeadline.url }
+          ],
+          inBothSites: true,
+          timestamp: new Date(Math.min(tmHeadline.timestamp.getTime(), hnHeadline.timestamp.getTime())),
+          popularity: (tmHeadline.popularity || 0) + (hnHeadline.popularity || 0),
+          techmemeData: tmHeadline,
+          hackernewsData: hnHeadline
+        });
+
+        processedTM.add(i);
+        processedHN.add(j);
+        matched = true;
+        console.log(`✓ String Match: "${tmHeadline.title.substring(0, 50)}..."`);
+        break;
+      }
+    }
+
+    if (!matched) {
+      merged.push({
+        title: tmHeadline.title,
+        urls: [{ source: 'Techmeme', url: tmHeadline.url }],
+        inBothSites: false,
+        timestamp: tmHeadline.timestamp,
+        popularity: tmHeadline.popularity || 0,
+        techmemeData: tmHeadline
+      });
+    }
+  }
+
+  // Add unmatched HN stories
+  for (let i = 0; i < hnHeadlines.length; i++) {
+    if (!processedHN.has(i)) {
+      const hnHeadline = hnHeadlines[i];
+      merged.push({
+        title: hnHeadline.title,
+        urls: [{ source: 'Hacker News', url: hnHeadline.url }],
+        inBothSites: false,
+        timestamp: hnHeadline.timestamp,
+        popularity: hnHeadline.popularity || 0,
+        hackernewsData: hnHeadline
+      });
+    }
+  }
+
+  // Sort: first by whether it's on both sites, then by popularity
+  merged.sort((a, b) => {
+    if (a.inBothSites !== b.inBothSites) {
+      return a.inBothSites ? -1 : 1;
+    }
+    return b.popularity - a.popularity;
   });
 
   return merged;
