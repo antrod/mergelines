@@ -94,8 +94,11 @@ export async function aiMatchStoriesBatch(
   const matchedHN = new Set<string>();
 
   // Only check top stories to save on API calls
-  const topTechmeme = techmemeHeadlines.slice(0, 15);
-  const topHN = hnHeadlines.slice(0, 20);
+  // Reduced to 5×10 = max 50 API calls for faster performance
+  const topTechmeme = techmemeHeadlines.slice(0, 5);
+  const topHN = hnHeadlines.slice(0, 10);
+
+  console.log(`Analyzing top ${topTechmeme.length} Techmeme × ${topHN.length} HN stories...`);
 
   for (const tmHeadline of topTechmeme) {
     for (const hnHeadline of topHN) {
