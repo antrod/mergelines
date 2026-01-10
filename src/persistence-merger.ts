@@ -111,11 +111,24 @@ export async function storeAndMatchHeadlines(
     if (id) hnIds.push(id);
   }
 
-  // Get all headlines within time window
+  // Get all headlines within time window (for matching)
   const techmemeInWindow = db.getHeadlinesInWindow(timeWindowHours, 'techmeme');
   const hnInWindow = db.getHeadlinesInWindow(timeWindowHours, 'hackernews');
 
   console.log(`🕐 Found ${techmemeInWindow.length} Techmeme + ${hnInWindow.length} HN headlines in ${timeWindowHours}h window`);
+
+  // Convert fresh headlines to stored format for display (use only current scrape)
+  const freshTechmemeStored = techmemeIds.map(id => {
+    const stored = db.getHeadlineById(id);
+    return stored;
+  }).filter((h): h is StoredHeadline => h !== null);
+
+  const freshHNStored = hnIds.map(id => {
+    const stored = db.getHeadlineById(id);
+    return stored;
+  }).filter((h): h is StoredHeadline => h !== null);
+
+  console.log(`📋 Using ${freshTechmemeStored.length} fresh Techmeme + ${freshHNStored.length} fresh HN for display`);
 
   // Find new matches
   let newMatches = 0;
@@ -159,13 +172,13 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  // Build merged view for display
+  // Build merged view for display (use ONLY fresh headlines from current scrape)
   const merged: MergedHeadline[] = [];
   const processedTM = new Set<number>();
   const processedHNDisplay = new Set<number>();
 
-  // Add matched stories first
-  for (const tmStored of techmemeInWindow) {
+  // Add matched stories first (check if fresh headlines match anything in 12h window)
+  for (const tmStored of freshTechmemeStored) {
     for (const hnStored of hnInWindow) {
       if (processedHNDisplay.has(hnStored.id)) continue;
 
@@ -190,11 +203,11 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  // Collect unmatched stories
+  // Collect unmatched stories from FRESH headlines only
   const unmatchedTM: MergedHeadline[] = [];
   const unmatchedHN: MergedHeadline[] = [];
 
-  for (const tmStored of techmemeInWindow) {
+  for (const tmStored of freshTechmemeStored) {
     if (!processedTM.has(tmStored.id)) {
       unmatchedTM.push({
         title: tmStored.title,
@@ -207,7 +220,7 @@ export async function storeAndMatchHeadlines(
     }
   }
 
-  for (const hnStored of hnInWindow) {
+  for (const hnStored of freshHNStored) {
     if (!processedHNDisplay.has(hnStored.id)) {
       unmatchedHN.push({
         title: hnStored.title,
@@ -219,6 +232,12 @@ export async function storeAndMatchHeadlines(
       });
     }
   }
+
+  // Sort Techmeme by position (popularity = position on page, lower is better)
+  unmatchedTM.sort((a, b) => a.popularity - b.popularity);
+
+  // Sort HN by points (popularity = points, higher is better)
+  unmatchedHN.sort((a, b) => b.popularity - a.popularity);
 
   // Deduplicate Techmeme stories (peel apart stories about same topic)
   const dedupedTM: MergedHeadline[] = [];

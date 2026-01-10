@@ -25,6 +25,7 @@ export async function scrapeTechmeme(): Promise<Headline[]> {
       // - Title is "Find" or other navigation text
       // - URL is an internal anchor link
       // - URL is a sponsored/ad link
+      // - URL points to mediagazer.com (sister site for media news)
       // - Title is too short (likely navigation)
       if (
         title &&
@@ -32,6 +33,7 @@ export async function scrapeTechmeme(): Promise<Headline[]> {
         title !== 'Find' &&
         !url.startsWith('#') &&
         !url.includes('/r2/') && // Sponsored links
+        !url.includes('mediagazer.com') && // Filter out Mediagazer stories
         title.length > 10 // Meaningful headlines are longer
       ) {
         headlines.push({

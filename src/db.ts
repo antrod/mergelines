@@ -122,6 +122,11 @@ class MergelinesDB {
     return existing?.id || 0;
   }
 
+  // Get a single headline by ID
+  getHeadlineById(id: number): StoredHeadline | null {
+    return this.db.prepare('SELECT * FROM headlines WHERE id = ?').get(id) as StoredHeadline | undefined || null;
+  }
+
   // Get headlines within time window (in hours)
   getHeadlinesInWindow(hoursAgo: number, source?: 'techmeme' | 'hackernews'): StoredHeadline[] {
     const cutoffTime = Date.now() - (hoursAgo * 60 * 60 * 1000);
