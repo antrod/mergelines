@@ -4,85 +4,60 @@
         <description><![CDATA[Top tech stories from Techmeme and Hacker News, featuring cross-platform matches]]></description>
         <link>https://yoursite.com</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 10 Jan 2026 12:11:39 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 10 Jan 2026 12:14:22 GMT</lastBuildDate>
         <atom:link href="https://yoursite.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sat, 10 Jan 2026 12:11:39 GMT</pubDate>
+        <pubDate>Sat, 10 Jan 2026 12:14:22 GMT</pubDate>
         <language><![CDATA[en]]></language>
         <ttl>60</ttl>
         <item>
             <title><![CDATA[Anthropic adds safeguards to prevent third-party apps, like OpenCode, from spoofing Claude Code to access Claude models for more favorable pricing and limits]]></title>
             <description><![CDATA[
         <p><strong>🔥 Featured on both Techmeme and Hacker News</strong></p>
-        <p>Anthropic has implemented new safeguards to prevent third-party applications, such as OpenCode, from spoofing its Claude Code interface, which could allow unauthorized access to Claude models at preferential pricing and limits. This move is significant as it aims to enhance security and maintain the integrity of its AI offerings.</p>
+        <p>Anthropic has implemented new safeguards to prevent third-party applications, such as OpenCode, from spoofing its Claude Code in order to access Claude models for more favorable pricing and usage limits. This move aims to enhance the security and integrity of its AI offerings.</p>
         <p><strong>Sources:</strong></p>
         <ul>
           <li><a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses">Techmeme</a></li>
-          <li><a href="https://rushter.com/blog/zsh-shell/">Hacker News</a> (197 points, 197 comments)</li>
+          <li><a href="https://rushter.com/blog/zsh-shell/">Hacker News</a> (197 points, 200 comments)</li>
         </ul>
       ]]></description>
             <link>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</link>
             <guid isPermaLink="true">https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</guid>
-            <pubDate>Sat, 10 Jan 2026 00:44:14 GMT</pubDate>
+            <pubDate>Sat, 10 Jan 2026 04:35:32 GMT</pubDate>
             <techmeme:url>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</techmeme:url>
             <hn:url>https://rushter.com/blog/zsh-shell/</hn:url>
             <hn:points>197</hn:points>
-            <hn:comments>197</hn:comments>
+            <hn:comments>200</hn:comments>
         </item>
         <item>
             <title><![CDATA[I got paid minimum wage to solve an impossible problem]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>14 points • 2 comments</p>
+          <p>16 points • 2 comments</p>
           <p><a href="https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve">Read on Hacker News</a></p>
         ]]></description>
             <link>https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve</link>
             <guid isPermaLink="true">https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve</guid>
             <pubDate>Sat, 10 Jan 2026 10:53:28 GMT</pubDate>
             <hn:url>https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve</hn:url>
-            <hn:points>14</hn:points>
+            <hn:points>16</hn:points>
             <hn:comments>2</hn:comments>
         </item>
         <item>
-            <title><![CDATA[PBS says it is ending PBS News Weekend, due to federal budget cuts; anchor John Yang says he'll be leaving PBS but many members of the show's team will remain]]></title>
+            <title><![CDATA[OpenAI launches a HIPAA-compliant version of ChatGPT for clinicians to help with medical reasoning and reduce administrative work, at Cedars-Sinai and elsewhere]]></title>
             <description><![CDATA[
           <p><strong>From Techmeme</strong></p>
-          <p><a href="https://mediagazer.com/#a260109p14">Read on Techmeme</a></p>
+          <p><a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai">Read on Techmeme</a></p>
         ]]></description>
-            <link>https://mediagazer.com/#a260109p14</link>
-            <guid isPermaLink="true">https://mediagazer.com/#a260109p14</guid>
-            <pubDate>Sat, 10 Jan 2026 12:08:02 GMT</pubDate>
-            <techmeme:url>https://mediagazer.com/#a260109p14</techmeme:url>
-        </item>
-        <item>
-            <title><![CDATA["We write to ask that you enforce your app stores' terms of service against X" [pdf]]]></title>
-            <description><![CDATA[
-          <p><strong>From Hacker News</strong></p>
-          <p>13 points • 0 comments</p>
-          <p><a href="https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf">Read on Hacker News</a></p>
-        ]]></description>
-            <link>https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf</link>
-            <guid isPermaLink="true">https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf</guid>
-            <pubDate>Sat, 10 Jan 2026 10:41:16 GMT</pubDate>
-            <hn:url>https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf</hn:url>
-            <hn:points>13</hn:points>
-            <hn:comments>0</hn:comments>
-        </item>
-        <item>
-            <title><![CDATA[Documents: OpenAI is asking contractors to upload their work from current or previous jobs to evaluate its models, leaving it to them to scrub confidential info]]></title>
-            <description><![CDATA[
-          <p><strong>From Techmeme</strong></p>
-          <p><a href="https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/">Read on Techmeme</a></p>
-        ]]></description>
-            <link>https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/</link>
-            <guid isPermaLink="true">https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/</guid>
-            <pubDate>Sat, 10 Jan 2026 12:08:02 GMT</pubDate>
-            <techmeme:url>https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/</techmeme:url>
+            <link>https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</link>
+            <guid isPermaLink="true">https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai</techmeme:url>
         </item>
         <item>
             <title><![CDATA[OLED, Not for Me]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>119 points • 121 comments</p>
+          <p>119 points • 123 comments</p>
           <p><a href="https://nuxx.net/blog/2026/01/09/oled-not-for-me/">Read on Hacker News</a></p>
         ]]></description>
             <link>https://nuxx.net/blog/2026/01/09/oled-not-for-me/</link>
@@ -90,57 +65,73 @@
             <pubDate>Sat, 10 Jan 2026 03:52:48 GMT</pubDate>
             <hn:url>https://nuxx.net/blog/2026/01/09/oled-not-for-me/</hn:url>
             <hn:points>119</hn:points>
-            <hn:comments>121</hn:comments>
+            <hn:comments>123</hn:comments>
         </item>
         <item>
-            <title><![CDATA[Chinese short-video app Kuaishou's stock has surged 88% over the past year, driven by the success of its Kling AI video generator, which has amassed 60M users]]></title>
+            <title><![CDATA[Rain, which helps businesses issue stablecoin-linked Visa cards, raised a $250M Series C led by ICONIQ at a $1.95B valuation, taking its total funding to $338M+]]></title>
             <description><![CDATA[
           <p><strong>From Techmeme</strong></p>
-          <p><a href="https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge">Read on Techmeme</a></p>
+          <p><a href="https://www.reuters.com/technology/stablecoin-firm-rain-valued-195-billion-latest-fundraise-2026-01-09/">Read on Techmeme</a></p>
         ]]></description>
-            <link>https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge</link>
-            <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge</guid>
-            <pubDate>Sat, 10 Jan 2026 12:08:02 GMT</pubDate>
-            <techmeme:url>https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge</techmeme:url>
+            <link>https://www.reuters.com/technology/stablecoin-firm-rain-valued-195-billion-latest-fundraise-2026-01-09/</link>
+            <guid isPermaLink="true">https://www.reuters.com/technology/stablecoin-firm-rain-valued-195-billion-latest-fundraise-2026-01-09/</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.reuters.com/technology/stablecoin-firm-rain-valued-195-billion-latest-fundraise-2026-01-09/</techmeme:url>
         </item>
         <item>
-            <title><![CDATA[Caltrain shows why every region should be moving toward regional rail]]></title>
-            <description><![CDATA[
-          <p><strong>From Hacker News</strong></p>
-          <p>10 points • 2 comments</p>
-          <p><a href="https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/">Read on Hacker News</a></p>
-        ]]></description>
-            <link>https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/</link>
-            <guid isPermaLink="true">https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/</guid>
-            <pubDate>Sat, 10 Jan 2026 00:25:29 GMT</pubDate>
-            <hn:url>https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/</hn:url>
-            <hn:points>10</hn:points>
-            <hn:comments>2</hn:comments>
-        </item>
-        <item>
-            <title><![CDATA[Xreal co-founder and CEO Chi Xu says the smart glass maker, which has a $1B+ valuation, recently raised $100M from “supply chain partners” and other backers]]></title>
+            <title><![CDATA[Sources say DeepSeek will launch V4, its next-generation model, in the coming weeks and say it outperformed Anthropic's Claude and OpenAI's GPT series in coding]]></title>
             <description><![CDATA[
           <p><strong>From Techmeme</strong></p>
-          <p><a href="https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding">Read on Techmeme</a></p>
+          <p><a href="https://www.theinformation.com/articles/deepseek-release-next-flagship-ai-model-strong-coding-ability">Read on Techmeme</a></p>
         ]]></description>
-            <link>https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding</link>
-            <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding</guid>
-            <pubDate>Sat, 10 Jan 2026 12:08:02 GMT</pubDate>
-            <techmeme:url>https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding</techmeme:url>
+            <link>https://www.theinformation.com/articles/deepseek-release-next-flagship-ai-model-strong-coding-ability</link>
+            <guid isPermaLink="true">https://www.theinformation.com/articles/deepseek-release-next-flagship-ai-model-strong-coding-ability</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.theinformation.com/articles/deepseek-release-next-flagship-ai-model-strong-coding-ability</techmeme:url>
         </item>
         <item>
-            <title><![CDATA[See it with your lying ears]]></title>
+            <title><![CDATA[The UK FCA grants Ripple approval for its Electronic Money Institution license and crypto asset registration, clearing the way for Ripple's UK expansion]]></title>
             <description><![CDATA[
-          <p><strong>From Hacker News</strong></p>
-          <p>7 points • 0 comments</p>
-          <p><a href="https://lcamtuf.substack.com/p/see-it-with-your-lying-ears">Read on Hacker News</a></p>
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.theblock.co/post/384953/ripple-secures-fca-authorization-clearing-path-uk-expansion">Read on Techmeme</a></p>
         ]]></description>
-            <link>https://lcamtuf.substack.com/p/see-it-with-your-lying-ears</link>
-            <guid isPermaLink="true">https://lcamtuf.substack.com/p/see-it-with-your-lying-ears</guid>
-            <pubDate>Sat, 10 Jan 2026 00:23:05 GMT</pubDate>
-            <hn:url>https://lcamtuf.substack.com/p/see-it-with-your-lying-ears</hn:url>
-            <hn:points>7</hn:points>
-            <hn:comments>0</hn:comments>
+            <link>https://www.theblock.co/post/384953/ripple-secures-fca-authorization-clearing-path-uk-expansion</link>
+            <guid isPermaLink="true">https://www.theblock.co/post/384953/ripple-secures-fca-authorization-clearing-path-uk-expansion</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.theblock.co/post/384953/ripple-secures-fca-authorization-clearing-path-uk-expansion</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[The Golden Globes signs a deal with Polymarket, which will provide stats and predictions about the awards show at the official 2026 viewing party]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://variety.com/2026/film/news/polymarket-golden-globes-prediction-market-partner-1236627204/">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://variety.com/2026/film/news/polymarket-golden-globes-prediction-market-partner-1236627204/</link>
+            <guid isPermaLink="true">https://variety.com/2026/film/news/polymarket-golden-globes-prediction-market-partner-1236627204/</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://variety.com/2026/film/news/polymarket-golden-globes-prediction-market-partner-1236627204/</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[Amazon files planning documents in Illinois to construct a 225,000 square foot big-box store, a return to a “Target-like” retail concept it previously shelved]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.theinformation.com/briefings/amazon-plans-big-box-retail-store">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.theinformation.com/briefings/amazon-plans-big-box-retail-store</link>
+            <guid isPermaLink="true">https://www.theinformation.com/briefings/amazon-plans-big-box-retail-store</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.theinformation.com/briefings/amazon-plans-big-box-retail-store</techmeme:url>
+        </item>
+        <item>
+            <title><![CDATA[Source: OnePay, the fintech firm behind Walmart's “super app”, recently bought back shares from employees at a price that values the startup at more than $4B]]></title>
+            <description><![CDATA[
+          <p><strong>From Techmeme</strong></p>
+          <p><a href="https://www.bloomberg.com/news/articles/2026-01-09/walmart-backed-super-app-onepay-hits-4-billion-valuation">Read on Techmeme</a></p>
+        ]]></description>
+            <link>https://www.bloomberg.com/news/articles/2026-01-09/walmart-backed-super-app-onepay-hits-4-billion-valuation</link>
+            <guid isPermaLink="true">https://www.bloomberg.com/news/articles/2026-01-09/walmart-backed-super-app-onepay-hits-4-billion-valuation</guid>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
+            <techmeme:url>https://www.bloomberg.com/news/articles/2026-01-09/walmart-backed-super-app-onepay-hits-4-billion-valuation</techmeme:url>
         </item>
     </channel>
 </rss>

@@ -13,6 +13,7 @@ export interface StoredHeadline {
   popularity: number;
   points?: number;
   commentCount?: number;
+  hn_discussion_url?: string;
   contentHash: string;
 }
 
@@ -46,6 +47,7 @@ class MergelinesDB {
         popularity INTEGER DEFAULT 0,
         points INTEGER,
         comment_count INTEGER,
+        hn_discussion_url TEXT,
         content_hash TEXT NOT NULL,
         UNIQUE(content_hash, source)
       )
@@ -91,8 +93,8 @@ class MergelinesDB {
 
     const stmt = this.db.prepare(`
       INSERT OR IGNORE INTO headlines
-      (title, url, source, timestamp, popularity, points, comment_count, content_hash)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      (title, url, source, timestamp, popularity, points, comment_count, hn_discussion_url, content_hash)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
@@ -103,6 +105,7 @@ class MergelinesDB {
       headline.popularity || 0,
       headline.points || null,
       headline.commentCount || null,
+      headline.hnDiscussionUrl || null,
       hash
     );
 

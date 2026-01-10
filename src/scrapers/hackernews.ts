@@ -38,7 +38,8 @@ export async function scrapeHackerNews(): Promise<Headline[]> {
           timestamp: new Date(story.time * 1000),
           popularity: story.score,
           points: story.score,
-          commentCount: story.descendants || 0
+          commentCount: story.descendants || 0,
+          hnDiscussionUrl: `https://news.ycombinator.com/item?id=${story.id}` // Always store HN discussion link
         });
       }
     }

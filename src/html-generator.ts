@@ -315,11 +315,11 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
         if (headline.hackernewsData) {
             const points = headline.hackernewsData.points || 0;
             const comments = headline.hackernewsData.commentCount || 0;
-            const hnUrl = headline.urls[1].url;
+            const hnDiscussionUrl = headline.hackernewsData.hnDiscussionUrl || headline.urls[1].url;
             metaHTML = `
                 <div class="story-meta">
                     <span class="meta-item">${points} points</span>
-                    <span class="meta-item"><a href="${hnUrl}" target="_blank" rel="noopener">${comments} comments</a></span>
+                    <span class="meta-item"><a href="${hnDiscussionUrl}" target="_blank" rel="noopener">${comments} comments</a></span>
                 </div>`;
         }
     } else {
@@ -330,6 +330,7 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
             badgeHTML = '<span class="badge hn">Hacker News</span>';
             const points = headline.hackernewsData?.points || 0;
             const comments = headline.hackernewsData?.commentCount || 0;
+            const hnDiscussionUrl = headline.hackernewsData?.hnDiscussionUrl || url;
 
             linksHTML = `
                 <div class="story-links">
@@ -341,7 +342,7 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
             metaHTML = `
                 <div class="story-meta">
                     <span class="meta-item">${points} points</span>
-                    <span class="meta-item"><a href="${url}" target="_blank" rel="noopener">${comments} comments</a></span>
+                    <span class="meta-item"><a href="${hnDiscussionUrl}" target="_blank" rel="noopener">${comments} comments</a></span>
                 </div>`;
         } else {
             badgeHTML = '<span class="badge tm">Techmeme</span>';

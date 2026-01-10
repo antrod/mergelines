@@ -6,6 +6,7 @@ export interface Headline {
   popularity?: number;
   points?: number;
   commentCount?: number;
+  hnDiscussionUrl?: string; // HN discussion URL, only for HN stories
 }
 
 export interface MergedHeadline {

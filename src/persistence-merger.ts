@@ -79,6 +79,7 @@ function storedToHeadline(stored: any): Headline {
     popularity: stored.popularity,
     points: stored.points || undefined,
     commentCount: stored.comment_count || undefined, // Database uses snake_case
+    hnDiscussionUrl: stored.hn_discussion_url || undefined,
   };
 }
 
