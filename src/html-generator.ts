@@ -24,79 +24,76 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            font-family: Georgia, 'Times New Roman', serif;
             background: #ffffff;
             min-height: 100vh;
-            padding: 24px 20px;
-            color: #1d1d1f;
-            line-height: 1.5;
+            padding: 40px 20px;
+            color: #111;
+            line-height: 1.7;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #ddd;
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 32px;
             font-weight: 700;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #111;
         }
 
         .subtitle {
-            font-size: 17px;
-            color: #86868b;
+            font-size: 16px;
+            color: #666;
             font-weight: 400;
             margin-bottom: 16px;
+            font-style: italic;
         }
 
         .meta {
             font-size: 13px;
-            color: #86868b;
-            margin-bottom: 12px;
+            color: #999;
+            margin-bottom: 16px;
         }
 
         .rss-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.04);
-            border-radius: 16px;
+            padding: 6px 14px;
+            background: #f5f5f5;
+            border-radius: 4px;
             text-decoration: none;
-            color: #1d1d1f;
+            color: #111;
             font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-weight: 400;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background 0.2s ease;
         }
 
         .rss-link:hover {
-            background: rgba(0, 0, 0, 0.08);
+            background: #e5e5e5;
         }
 
         .stories {
             display: grid;
-            gap: 4px;
+            gap: 0;
         }
 
         .story {
             background: white;
-            border-radius: 0;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            transition: all 0.2s ease;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
             position: relative;
         }
 
@@ -111,7 +108,7 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             left: -20px;
             bottom: 0;
             width: 3px;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             opacity: 0;
             transition: opacity 0.2s ease;
         }
@@ -120,57 +117,55 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             opacity: 1;
         }
 
-        .story:hover {
-            background: rgba(0, 0, 0, 0.01);
-        }
-
         .story-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .story-number {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: #86868b;
-            min-width: 24px;
+            color: #999;
+            min-width: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.01em;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .badge.featured {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             color: white;
         }
 
         .badge.hn {
-            background: rgba(255, 102, 0, 0.1);
+            background: #ffeee5;
             color: #ff6600;
         }
 
         .badge.tm {
-            background: rgba(0, 122, 255, 0.1);
+            background: #e5f2ff;
             color: #007aff;
         }
 
         .story-title {
-            font-size: 18px;
-            font-weight: 600;
-            line-height: 1.35;
-            margin-bottom: 10px;
-            color: #1d1d1f;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #111;
         }
 
         .story-title a {
@@ -184,39 +179,16 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .story-summary {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #515154;
-            margin-bottom: 10px;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 8px;
-            border-left: 2px solid #667eea;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 8px;
+            padding: 12px 0;
+            font-style: italic;
         }
 
         .story-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .story-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            background: rgba(0, 0, 0, 0.04);
-            border-radius: 10px;
-            text-decoration: none;
-            color: #1d1d1f;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.15s ease;
-        }
-
-        .story-link:hover {
-            background: rgba(0, 0, 0, 0.08);
+            display: none;
         }
 
         .story-meta {
@@ -224,7 +196,8 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             flex-wrap: wrap;
             gap: 12px;
             font-size: 12px;
-            color: #86868b;
+            color: #999;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .meta-item {
@@ -235,11 +208,12 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
 
         footer {
             text-align: center;
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            color: #86868b;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #ddd;
+            color: #999;
             font-size: 13px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         @media (max-width: 768px) {
@@ -300,7 +274,7 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         </header>
 
         <div class="stories">
-${await Promise.all(topHeadlines.map(async (headline, index) => {
+${(await Promise.all(topHeadlines.map(async (headline, index) => {
     const number = index + 1;
     let badgeHTML = '';
     let summaryHTML = '';
@@ -379,7 +353,7 @@ ${await Promise.all(topHeadlines.map(async (headline, index) => {
                 </h2>
                 ${summaryHTML}${linksHTML}${metaHTML}
             </article>`;
-}))}
+}))).join('')}
         </div>
 
         <footer>
