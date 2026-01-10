@@ -4,25 +4,25 @@
         <description><![CDATA[Top tech stories from Techmeme and Hacker News, featuring cross-platform matches]]></description>
         <link>https://antrod.github.io/mergelines/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 10 Jan 2026 12:45:17 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 10 Jan 2026 13:07:08 GMT</lastBuildDate>
         <atom:link href="https://antrod.github.io/mergelines/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sat, 10 Jan 2026 12:45:17 GMT</pubDate>
+        <pubDate>Sat, 10 Jan 2026 13:07:08 GMT</pubDate>
         <language><![CDATA[en]]></language>
         <ttl>60</ttl>
         <item>
             <title><![CDATA[Anthropic adds safeguards to prevent third-party apps, like OpenCode, from spoofing Claude Code to access Claude models for more favorable pricing and limits]]></title>
             <description><![CDATA[
         <p><strong>🔥 Featured on both Techmeme and Hacker News</strong></p>
-        <p>Anthropic has implemented new safeguards to prevent third-party applications, such as OpenCode, from spoofing its Claude Code in order to access Claude models for more favorable pricing and usage limits. This move aims to enhance the security and integrity of its AI offerings.</p>
+        <p>Anthropic has implemented new safeguards to prevent third-party applications, such as OpenCode, from spoofing its Claude Code to gain unauthorized access to Claude models and exploit pricing advantages. This move highlights the company's focus on securing its AI models and maintaining control over access and usage limits.</p>
         <p><strong>Sources:</strong></p>
         <ul>
           <li><a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses">Techmeme</a></li>
-          <li><a href="https://rushter.com/blog/zsh-shell/">Hacker News</a> (197 points, 200 comments)</li>
+          <li><a href="https://twitter.com/MarcJSchmidt/status/2009688028931875156">Hacker News</a> (5 points, 1 comments)</li>
         </ul>
       ]]></description>
             <link>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</link>
             <guid isPermaLink="true">https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</guid>
-            <pubDate>Sat, 10 Jan 2026 04:35:32 GMT</pubDate>
+            <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[How to code Claude Code in 200 lines of code]]></title>
@@ -88,15 +88,15 @@
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Show HN: I made a memory game to teach you to play piano by ear]]></title>
+            <title><![CDATA[How will the miracle happen today?]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>486 points • 163 comments</p>
-          <p><a href="https://lend-me-your-ears.specr.net">Read on Hacker News</a></p>
+          <p>463 points • 236 comments</p>
+          <p><a href="https://kk.org/thetechnium/how-will-the-miracle-happen-today/">Read on Hacker News</a></p>
         ]]></description>
-            <link>https://lend-me-your-ears.specr.net</link>
-            <guid isPermaLink="true">https://lend-me-your-ears.specr.net</guid>
-            <pubDate>Fri, 09 Jan 2026 17:17:28 GMT</pubDate>
+            <link>https://kk.org/thetechnium/how-will-the-miracle-happen-today/</link>
+            <guid isPermaLink="true">https://kk.org/thetechnium/how-will-the-miracle-happen-today/</guid>
+            <pubDate>Sun, 04 Jan 2026 16:32:13 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Poland's President Karol Nawrocki vetoes legislation meant to enforce the EU's DSA in Poland, arguing it would grant excessive powers to government officials]]></title>
@@ -109,15 +109,15 @@
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[How will the miracle happen today?]]></title>
+            <title><![CDATA[Kagi releases alpha version of Orion for Linux]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>463 points • 236 comments</p>
-          <p><a href="https://kk.org/thetechnium/how-will-the-miracle-happen-today/">Read on Hacker News</a></p>
+          <p>399 points • 280 comments</p>
+          <p><a href="https://help.kagi.com/orion/misc/linux-status.html">Read on Hacker News</a></p>
         ]]></description>
-            <link>https://kk.org/thetechnium/how-will-the-miracle-happen-today/</link>
-            <guid isPermaLink="true">https://kk.org/thetechnium/how-will-the-miracle-happen-today/</guid>
-            <pubDate>Sun, 04 Jan 2026 16:32:13 GMT</pubDate>
+            <link>https://help.kagi.com/orion/misc/linux-status.html</link>
+            <guid isPermaLink="true">https://help.kagi.com/orion/misc/linux-status.html</guid>
+            <pubDate>Fri, 09 Jan 2026 12:54:48 GMT</pubDate>
         </item>
     </channel>
 </rss>
