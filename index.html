@@ -6,6 +6,38 @@
     <title>Mergelines</title>
     <link rel="alternate" type="application/rss+xml" title="Mergelines RSS Feed" href="/feed.xml">
     <style>
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border-color: #e5e5e5;
+            --accent-primary: #6366f1;
+            --accent-hover: #4f46e5;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f0f0f;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #262626;
+                --text-primary: #f5f5f5;
+                --text-secondary: #a3a3a3;
+                --text-tertiary: #737373;
+                --border-color: #2a2a2a;
+                --accent-primary: #818cf8;
+                --accent-hover: #a5b4fc;
+                --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+                --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,93 +45,111 @@
         }
 
         body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--bg-primary);
             min-height: 100vh;
-            padding: 40px 20px;
-            color: #111;
-            line-height: 1.7;
+            padding: 60px 20px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
-            max-width: 650px;
+            max-width: 720px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid #ddd;
+            margin-bottom: 56px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-            color: #111;
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #666;
-            font-weight: 400;
-            margin-bottom: 16px;
-            font-style: italic;
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
         }
 
         .meta {
-            font-size: 13px;
-            color: #999;
-            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
         .rss-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: #f5f5f5;
-            border-radius: 4px;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--accent-primary);
+            border-radius: 8px;
             text-decoration: none;
-            color: #111;
-            font-size: 13px;
-            font-weight: 400;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: background 0.2s ease;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .rss-link:hover {
-            background: #e5e5e5;
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .stories {
             display: grid;
-            gap: 0;
+            gap: 20px;
         }
 
         .story {
-            background: white;
-            padding: 16px 0;
-            border-bottom: 1px solid #eee;
+            background: var(--bg-secondary);
+            padding: 24px;
+            border-radius: 12px;
             position: relative;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
         }
 
-        .story:last-child {
-            border-bottom: none;
+        .story:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
         }
 
         .story::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -20px;
-            bottom: 0;
-            width: 3px;
-            background: #667eea;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), #8b5cf6);
+            border-radius: 12px 0 0 12px;
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .story:hover::before {
+            opacity: 1;
         }
 
         .story.featured::before {
@@ -109,69 +159,69 @@
         .story-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .story-number {
-            font-size: 12px;
-            font-weight: 600;
-            color: #999;
-            min-width: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-tertiary);
+            min-width: 24px;
+            font-variant-numeric: tabular-nums;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .badge.featured {
-            background: #667eea;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
         }
 
         .badge.hn {
-            background: #ffeee5;
-            color: #ff6600;
+            background: #ff6600;
+            color: white;
         }
 
         .badge.tm {
-            background: #e5f2ff;
-            color: #007aff;
+            background: #0ea5e9;
+            color: white;
         }
 
         .story-title {
-            font-size: 17px;
-            font-weight: 400;
-            line-height: 1.4;
-            margin-bottom: 8px;
-            color: #111;
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
         }
 
         .story-title a {
             color: inherit;
             text-decoration: none;
-            transition: color 0.15s ease;
+            transition: color 0.2s ease;
         }
 
         .story-title a:hover {
-            color: #667eea;
+            color: var(--accent-primary);
         }
 
         .story-summary {
             font-size: 15px;
             line-height: 1.7;
-            color: #444;
-            margin-bottom: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
             padding: 12px 0;
             font-style: italic;
         }
@@ -183,50 +233,82 @@
         .story-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            font-size: 12px;
-            color: #999;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-weight: 500;
         }
 
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
+        }
+
+        .meta-item::before {
+            content: '•';
+            margin-right: 4px;
+            color: var(--accent-primary);
+        }
+
+        .meta-item:first-child::before {
+            content: none;
         }
 
         footer {
             text-align: center;
-            margin-top: 64px;
-            padding-top: 32px;
-            border-top: 1px solid #ddd;
-            color: #999;
-            font-size: 13px;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-hover);
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 40px 16px;
+            }
+
             h1 {
-                font-size: 32px;
+                font-size: 36px;
             }
 
             .subtitle {
-                font-size: 15px;
+                font-size: 16px;
+            }
+
+            header {
+                margin-bottom: 40px;
+                padding-bottom: 32px;
             }
 
             .story {
-                padding: 16px 0;
+                padding: 20px;
             }
 
             .story-title {
-                font-size: 16px;
+                font-size: 17px;
+            }
+
+            .stories {
+                gap: 16px;
             }
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -235,19 +317,28 @@
         }
 
         .story {
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
         .story:nth-child(1) { animation-delay: 0s; opacity: 0; }
         .story:nth-child(2) { animation-delay: 0.05s; opacity: 0; }
         .story:nth-child(3) { animation-delay: 0.1s; opacity: 0; }
-        .story:nth-child(4) { animation-delay: 0.15000000000000002s; opacity: 0; }
+        .story:nth-child(4) { animation-delay: 0.15s; opacity: 0; }
         .story:nth-child(5) { animation-delay: 0.2s; opacity: 0; }
         .story:nth-child(6) { animation-delay: 0.25s; opacity: 0; }
-        .story:nth-child(7) { animation-delay: 0.30000000000000004s; opacity: 0; }
-        .story:nth-child(8) { animation-delay: 0.35000000000000003s; opacity: 0; }
+        .story:nth-child(7) { animation-delay: 0.3s; opacity: 0; }
+        .story:nth-child(8) { animation-delay: 0.35s; opacity: 0; }
         .story:nth-child(9) { animation-delay: 0.4s; opacity: 0; }
         .story:nth-child(10) { animation-delay: 0.45s; opacity: 0; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .rss-link svg {
+            animation: pulse 2s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
