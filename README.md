@@ -1,16 +1,16 @@
 # Mergelines
 
-A TypeScript-based news aggregator that fetches and ranks headlines from Techmeme and Hacker News, highlighting stories that appear on both platforms using AI-powered semantic matching.
+A TypeScript-based news aggregator that fetches and ranks headlines from Techmeme and Hacker News, featuring persistent storage, AI-generated summaries, and an RSS feed for stories that appear on both platforms.
 
 ## Features
 
-- **AI-Powered Story Matching**: Uses Mastra and OpenAI to understand if stories are about the same topic, even with different headlines
-- **Fallback String Matching**: Automatically falls back to Levenshtein distance and word overlap when AI is unavailable
-- **Parallel Scraping**: Fetches headlines from both sources simultaneously
-- **Smart Filtering**: Removes navigation links, ads, and duplicate entries
-- **Intelligent Ranking**: Prioritizes cross-platform stories, then by popularity
-- **Beautiful CLI**: Color-coded output with metrics and timestamps
-- **Time Window**: 24-hour matching window for breaking news
+- **Persistent Storage**: SQLite database tracks headlines with 12-hour matching window
+- **AI Summaries**: OpenAI-powered summaries for cross-platform stories
+- **RSS Feed**: Auto-generated feed with summaries and links to both sources
+- **Beautiful HTML**: Minimalist reading interface inspired by editorial blogs
+- **Smart Matching**: Levenshtein distance, word overlap, and domain matching
+- **Deduplication**: Filters similar Techmeme stories for diversity
+- **Interleaved Display**: Balanced mix of HN and Techmeme stories
 
 ## Installation
 
@@ -20,9 +20,9 @@ npm install
 
 ## Setup
 
-### 1. Configure OpenAI API (Optional but Recommended)
+### Configure OpenAI API (Required for Summaries)
 
-For AI-powered story matching, create a `.env` file:
+Create a `.env` file:
 
 ```bash
 cp .env.example .env
@@ -36,7 +36,7 @@ OPENAI_API_KEY=sk-your-api-key-here
 
 Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys).
 
-**Note**: The app works without an API key using string-based matching, but AI matching provides significantly better results.
+**Note**: The app works without an API key but won't generate summaries for cross-platform stories.
 
 ## Usage
 
@@ -58,42 +58,58 @@ npm start
 ### 1. Scraping
 Fetches the latest headlines from:
 - **Techmeme**: Web scraping with Cheerio (filters ads and navigation)
-- **Hacker News**: Official Firebase API (top 30 stories)
+- **Hacker News**: Official Firebase API (top 30 stories with points/comments)
 
-### 2. AI-Powered Matching (with API key)
-Uses Mastra agents with GPT-4o-mini to:
-- Understand semantic similarity between headlines
-- Identify same stories with different framing
-- Account for different editorial angles
-- Match top 15 Techmeme × top 20 HN stories
+### 2. Persistence & Matching
+- Stores all headlines in SQLite with timestamps
+- Finds matches within 12-hour window using:
+  - Domain matching (same source URL)
+  - Levenshtein similarity (45% threshold)
+  - Word overlap with stop-word filtering (35% threshold)
+- Deduplicates similar Techmeme stories (50% threshold)
 
-### 3. String-Based Matching (fallback)
-Uses multiple signals:
-- Domain matching (same source URL)
-- Levenshtein similarity (45% threshold)
-- Word overlap with stop-word filtering (35% threshold)
-- 24-hour time window
+### 3. AI Summaries
+For stories appearing on both platforms:
+- Generates 2-3 sentence summaries using GPT-4o-mini
+- Stored in database with cross-platform match records
 
-### 4. Ranking
-- Stories on both sites appear first (🔥 BOTH)
-- Then sorted by combined popularity score
-- HN points + Techmeme position
+### 4. Output Generation
+- **RSS Feed**: Top 10 stories with AI summaries and dual links
+- **HTML Page**: Minimal editorial design with clickable headlines
+- **CLI Display**: Color-coded output with full metrics
+
+### 5. Ranking & Display
+- Cross-platform stories (🔥) appear first
+- Remaining slots alternate between HN and Techmeme
+- HN sorted by points, Techmeme deduplicated for diversity
+- Limited to 10 stories total
 
 ## Output
 
-The CLI displays:
+### RSS Feed (`feed.xml`)
+- Cross-platform stories with AI summaries
+- Links to both Techmeme and HN discussions
+- HN points and comment counts
+- Updates automatically every hour via GitHub Actions
+
+### HTML Page (`index.html`)
+- Minimalist serif typography (Georgia)
+- Click headlines → original articles
+- Click comments → HN discussion
+- Responsive design, 650px max width
+
+### CLI Display
 - 🔥 **BOTH** badge for cross-platform stories
-- Source indicator for single-platform stories
-- Complete URLs for each source
-- Hacker News metrics (points, comments)
-- Timestamps
-- Match type indicator (AI vs String matching)
+- Source badges (Techmeme/Hacker News)
+- Complete URLs and metrics
+- Timestamps and match counts
 
 ## Dependencies
 
 ### Core
-- **@mastra/core**: AI agent framework for story matching
-- **@ai-sdk/openai**: OpenAI integration
+- **openai**: Direct OpenAI API integration for summaries
+- **better-sqlite3**: Fast SQLite database
+- **rss**: RSS feed generation
 - **axios**: HTTP client for web scraping
 - **cheerio**: HTML parsing for Techmeme
 - **dotenv**: Environment variable management
@@ -107,28 +123,36 @@ The CLI displays:
 ```
 mergelines/
 ├── src/
-│   ├── index.ts           # Main CLI entry point
-│   ├── types.ts           # TypeScript interfaces
-│   ├── ai-matcher.ts      # Mastra AI agent for story matching
-│   ├── merger.ts          # Ranking and merging logic (AI + string)
+│   ├── index.ts              # Main CLI entry point
+│   ├── types.ts              # TypeScript interfaces
+│   ├── db.ts                 # SQLite database layer
+│   ├── persistence-merger.ts # 12-hour window matching logic
+│   ├── rss.ts                # RSS feed + AI summary generation
+│   ├── html-generator.ts     # Minimal HTML page generator
 │   └── scrapers/
-│       ├── techmeme.ts    # Techmeme web scraper
-│       └── hackernews.ts  # Hacker News API client
-├── dist/                  # Compiled JavaScript output
-├── .env                   # API keys (gitignored)
-├── .env.example           # Example environment file
-├── package.json
-└── tsconfig.json
+│       ├── techmeme.ts       # Techmeme web scraper
+│       └── hackernews.ts     # Hacker News API client
+├── .github/workflows/
+│   └── update-feed.yml       # Hourly scraper + deployment
+├── dist/                     # Compiled JavaScript output
+├── mergelines.db             # SQLite database (gitignored)
+├── feed.xml                  # Generated RSS feed
+├── index.html                # Generated HTML page
+├── .env                      # API keys (gitignored)
+└── package.json
 ```
 
-## About Mastra
+## Deployment
 
-This project uses [Mastra](https://mastra.ai/), an open-source TypeScript framework for building AI agents, developed by the team behind Gatsby. Mastra enables:
+The project includes GitHub Actions for free deployment:
 
-- **Semantic Understanding**: AI agents that understand context and meaning
-- **Intelligent Matching**: Beyond simple string comparison
-- **Graceful Degradation**: Falls back to algorithms when AI unavailable
-- **Type Safety**: Full TypeScript support
+1. **Hourly Updates**: Runs scraper every hour
+2. **GitHub Pages**: Serves RSS feed and HTML at `https://<username>.github.io/mergelines/`
+
+Setup:
+1. Add `OPENAI_API_KEY` to GitHub Secrets
+2. Enable GitHub Pages (Source: GitHub Actions)
+3. Feed will be live at `https://<username>.github.io/mergelines/feed.xml`
 
 ## License
 
