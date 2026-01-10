@@ -40,38 +40,41 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: npm run dev
 
-      - name: Commit updated database and feed
+      - name: Commit updated database
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Fetch latest changes and try to merge them
+          # Save generated files temporarily (they're needed for deployment)
+          cp feed.xml feed.xml.tmp
+          cp index.html index.html.tmp
+
+          # Fetch and sync with latest
           git fetch origin main
+          git pull --rebase origin/main || git rebase --abort
 
-          # Stash our changes
-          git add mergelines.db feed.xml index.html
-          git stash
+          # Restore generated files (don't commit them, just keep in working dir for deployment)
+          mv feed.xml.tmp feed.xml
+          mv index.html.tmp index.html
 
-          # Reset to latest origin/main
-          git reset --hard origin/main
+          # Commit only the database
+          git add mergelines.db
 
-          # Re-apply our changes
-          git stash pop || true
-
-          # Commit if there are changes
-          git add mergelines.db feed.xml index.html
+          # Commit if database changed
           if ! git diff --staged --quiet; then
-            git commit -m "Update feed and database - $(date -u '+%Y-%m-%d %H:%M UTC')"
-            # Try to push, retry up to 3 times with delay if it fails
+            git commit -m "Update database - $(date -u '+%Y-%m-%d %H:%M UTC')"
+            # Try to push
             for i in 1 2 3; do
               if git push; then
+                echo "Successfully pushed database update"
                 break
               fi
               echo "Push failed, retrying in 5 seconds..."
               sleep 5
-              git fetch origin main
-              git rebase origin/main || git rebase --skip
+              git pull --rebase origin/main || git rebase --abort
             done
+          else
+            echo "No database changes to commit"
           fi
 
       - name: Setup Pages
