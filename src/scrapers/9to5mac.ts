@@ -21,7 +21,7 @@ export async function scrape9to5Mac(): Promise<Headline[]> {
       const link = item.find('link').text().trim();
       const pubDate = item.find('pubDate').text().trim();
       const creator = item.find('dc\\:creator, creator').text().trim();
-      const commentCount = parseInt(item.find('slash\\:comments, comments').text().trim() || '0', 10);
+      const commentCount = parseInt(item.find('slash\\:comments').text().trim() || '0', 10);
 
       // Filter out promoted/sponsored posts
       if (creator.toLowerCase().includes('sponsored')) {

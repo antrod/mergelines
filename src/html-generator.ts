@@ -365,7 +365,7 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
             if (comments > 0) {
                 metaHTML = `
                     <div class="story-meta">
-                        <span class="meta-item">${comments} comments</span>
+                        <span class="meta-item"><a href="${url}#comments" target="_blank" rel="noopener">${comments} comments</a></span>
                     </div>`;
             }
         } else {
