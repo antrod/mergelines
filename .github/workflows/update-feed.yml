@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # Allow manual trigger
 
 permissions:
-  contents: read
+  contents: write  # Changed from 'read' to 'write' to allow committing
   pages: write
   id-token: write
 
