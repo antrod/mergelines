@@ -2,11 +2,11 @@
     <channel>
         <title><![CDATA[Mergelines - Top Tech News]]></title>
         <description><![CDATA[Top tech stories from Techmeme and Hacker News, featuring cross-platform matches]]></description>
-        <link>https://yoursite.com</link>
+        <link>https://antrod.github.io/mergelines/</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 10 Jan 2026 12:23:58 GMT</lastBuildDate>
-        <atom:link href="https://yoursite.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sat, 10 Jan 2026 12:23:58 GMT</pubDate>
+        <lastBuildDate>Sat, 10 Jan 2026 12:45:17 GMT</lastBuildDate>
+        <atom:link href="https://antrod.github.io/mergelines/feed.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Sat, 10 Jan 2026 12:45:17 GMT</pubDate>
         <language><![CDATA[en]]></language>
         <ttl>60</ttl>
         <item>
@@ -23,10 +23,6 @@
             <link>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</link>
             <guid isPermaLink="true">https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</guid>
             <pubDate>Sat, 10 Jan 2026 04:35:32 GMT</pubDate>
-            <techmeme:url>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</techmeme:url>
-            <hn:url>https://rushter.com/blog/zsh-shell/</hn:url>
-            <hn:points>197</hn:points>
-            <hn:comments>200</hn:comments>
         </item>
         <item>
             <title><![CDATA[How to code Claude Code in 200 lines of code]]></title>
@@ -38,9 +34,6 @@
             <link>https://www.mihaileric.com/The-Emperor-Has-No-Clothes/</link>
             <guid isPermaLink="true">https://www.mihaileric.com/The-Emperor-Has-No-Clothes/</guid>
             <pubDate>Thu, 08 Jan 2026 19:54:26 GMT</pubDate>
-            <hn:url>https://www.mihaileric.com/The-Emperor-Has-No-Clothes/</hn:url>
-            <hn:points>760</hn:points>
-            <hn:comments>231</hn:comments>
         </item>
         <item>
             <title><![CDATA[Italy fines Cloudflare €14.2M for refusing to block pirate sites on its 1.1.1.1 DNS service; CEO Matthew Prince says he will discuss it with US officials]]></title>
@@ -51,7 +44,6 @@
             <link>https://arstechnica.com/tech-policy/2026/01/cloudflare-may-pull-servers-out-of-italy-over-order-that-it-block-pirate-sites/</link>
             <guid isPermaLink="true">https://arstechnica.com/tech-policy/2026/01/cloudflare-may-pull-servers-out-of-italy-over-order-that-it-block-pirate-sites/</guid>
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
-            <techmeme:url>https://arstechnica.com/tech-policy/2026/01/cloudflare-may-pull-servers-out-of-italy-over-order-that-it-block-pirate-sites/</techmeme:url>
         </item>
         <item>
             <title><![CDATA[Cloudflare CEO on the Italy fines]]></title>
@@ -63,9 +55,6 @@
             <link>https://twitter.com/eastdakota/status/2009654937303896492</link>
             <guid isPermaLink="true">https://twitter.com/eastdakota/status/2009654937303896492</guid>
             <pubDate>Fri, 09 Jan 2026 16:46:48 GMT</pubDate>
-            <hn:url>https://twitter.com/eastdakota/status/2009654937303896492</hn:url>
-            <hn:points>555</hn:points>
-            <hn:comments>794</hn:comments>
         </item>
         <item>
             <title><![CDATA[The US Commerce Department drops a plan to impose restrictions on Chinese drones to address national security concerns; FCC barred imports in December 2025]]></title>
@@ -76,7 +65,6 @@
             <link>https://www.reuters.com/world/china/us-commerce-department-drops-plan-impose-restrictions-chinese-made-drones-2026-01-09/</link>
             <guid isPermaLink="true">https://www.reuters.com/world/china/us-commerce-department-drops-plan-impose-restrictions-chinese-made-drones-2026-01-09/</guid>
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
-            <techmeme:url>https://www.reuters.com/world/china/us-commerce-department-drops-plan-impose-restrictions-chinese-made-drones-2026-01-09/</techmeme:url>
         </item>
         <item>
             <title><![CDATA[“Erdos problem #728 was solved more or less autonomously by AI”]]></title>
@@ -88,9 +76,6 @@
             <link>https://mathstodon.xyz/@tao/115855840223258103</link>
             <guid isPermaLink="true">https://mathstodon.xyz/@tao/115855840223258103</guid>
             <pubDate>Fri, 09 Jan 2026 22:39:15 GMT</pubDate>
-            <hn:url>https://mathstodon.xyz/@tao/115855840223258103</hn:url>
-            <hn:points>497</hn:points>
-            <hn:comments>270</hn:comments>
         </item>
         <item>
             <title><![CDATA[Researchers say GPT 4.1, Claude 3.7 Sonnet, Gemini 2.5 Pro, and Grok 3 can reproduce long excerpts from books they were trained on when strategically prompted]]></title>
@@ -101,7 +86,6 @@
             <link>https://www.theatlantic.com/technology/2026/01/ai-memorization-research/685552/?gift=iWa_iB9lkw4UuiWbIbrWGUKS1lfoO5FgFgRv6F5W4_c&amp;utm_source=copy-link&amp;utm_medium=social&amp;utm_campaign=share</link>
             <guid isPermaLink="true">https://www.theatlantic.com/technology/2026/01/ai-memorization-research/685552/?gift=iWa_iB9lkw4UuiWbIbrWGUKS1lfoO5FgFgRv6F5W4_c&amp;utm_source=copy-link&amp;utm_medium=social&amp;utm_campaign=share</guid>
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
-            <techmeme:url>https://www.theatlantic.com/technology/2026/01/ai-memorization-research/685552/?gift=iWa_iB9lkw4UuiWbIbrWGUKS1lfoO5FgFgRv6F5W4_c&amp;utm_source=copy-link&amp;utm_medium=social&amp;utm_campaign=share</techmeme:url>
         </item>
         <item>
             <title><![CDATA[Show HN: I made a memory game to teach you to play piano by ear]]></title>
@@ -113,9 +97,6 @@
             <link>https://lend-me-your-ears.specr.net</link>
             <guid isPermaLink="true">https://lend-me-your-ears.specr.net</guid>
             <pubDate>Fri, 09 Jan 2026 17:17:28 GMT</pubDate>
-            <hn:url>https://lend-me-your-ears.specr.net</hn:url>
-            <hn:points>486</hn:points>
-            <hn:comments>163</hn:comments>
         </item>
         <item>
             <title><![CDATA[Poland's President Karol Nawrocki vetoes legislation meant to enforce the EU's DSA in Poland, arguing it would grant excessive powers to government officials]]></title>
@@ -126,7 +107,6 @@
             <link>https://www.politico.eu/article/polish-president-blocks-brussels-big-tech-law-toeing-donald-trump-line-on-free-speech/</link>
             <guid isPermaLink="true">https://www.politico.eu/article/polish-president-blocks-brussels-big-tech-law-toeing-donald-trump-line-on-free-speech/</guid>
             <pubDate>Sat, 10 Jan 2026 12:14:21 GMT</pubDate>
-            <techmeme:url>https://www.politico.eu/article/polish-president-blocks-brussels-big-tech-law-toeing-donald-trump-line-on-free-speech/</techmeme:url>
         </item>
         <item>
             <title><![CDATA[How will the miracle happen today?]]></title>
@@ -138,9 +118,6 @@
             <link>https://kk.org/thetechnium/how-will-the-miracle-happen-today/</link>
             <guid isPermaLink="true">https://kk.org/thetechnium/how-will-the-miracle-happen-today/</guid>
             <pubDate>Sun, 04 Jan 2026 16:32:13 GMT</pubDate>
-            <hn:url>https://kk.org/thetechnium/how-will-the-miracle-happen-today/</hn:url>
-            <hn:points>463</hn:points>
-            <hn:comments>236</hn:comments>
         </item>
     </channel>
 </rss>

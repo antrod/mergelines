@@ -66,8 +66,8 @@ export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
   const feed = new RSS({
     title: 'Mergelines - Top Tech News',
     description: 'Top tech stories from Techmeme and Hacker News, featuring cross-platform matches',
-    feed_url: 'https://yoursite.com/feed.xml',
-    site_url: 'https://yoursite.com',
+    feed_url: 'https://antrod.github.io/mergelines/feed.xml',
+    site_url: 'https://antrod.github.io/mergelines/',
     language: 'en',
     pubDate: new Date(),
     ttl: 60,
@@ -79,7 +79,6 @@ export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
   for (const headline of topHeadlines) {
     let itemDescription = '';
     let primaryUrl = '';
-    const customElements: any[] = [];
 
     if (headline.inBothSites) {
       // Cross-platform story - fetch summary from DB
@@ -98,12 +97,6 @@ export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
         </ul>
       `;
       primaryUrl = headline.urls[0].url;
-      customElements.push(
-        { 'techmeme:url': headline.urls[0].url },
-        { 'hn:url': headline.urls[1].url },
-        { 'hn:points': headline.hackernewsData?.points?.toString() || '0' },
-        { 'hn:comments': headline.hackernewsData?.commentCount?.toString() || '0' }
-      );
     } else {
       // Single-source story
       const source = headline.urls[0].source;
@@ -115,17 +108,11 @@ export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
           <p>${headline.hackernewsData?.points || 0} points • ${headline.hackernewsData?.commentCount || 0} comments</p>
           <p><a href="${primaryUrl}">Read on Hacker News</a></p>
         `;
-        customElements.push(
-          { 'hn:url': primaryUrl },
-          { 'hn:points': headline.hackernewsData?.points?.toString() || '0' },
-          { 'hn:comments': headline.hackernewsData?.commentCount?.toString() || '0' }
-        );
       } else {
         itemDescription = `
           <p><strong>From Techmeme</strong></p>
           <p><a href="${primaryUrl}">Read on Techmeme</a></p>
         `;
-        customElements.push({ 'techmeme:url': primaryUrl });
       }
     }
 
@@ -134,7 +121,6 @@ export async function generateRSSFeed(mergedHeadlines: any[]): Promise<string> {
       description: itemDescription,
       url: primaryUrl,
       date: headline.timestamp,
-      custom_elements: customElements,
     });
   }
 
