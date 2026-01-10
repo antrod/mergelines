@@ -6,6 +6,11 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch: # Allow manual trigger
 
+# Ensure only one deployment runs at a time
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 permissions:
   contents: write  # Changed from 'read' to 'write' to allow committing
   pages: write
