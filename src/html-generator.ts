@@ -39,8 +39,8 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
 
         header {
             text-align: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #ddd;
         }
 
@@ -48,7 +48,7 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             font-size: 32px;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #111;
         }
 
@@ -56,14 +56,14 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             font-size: 16px;
             color: #666;
             font-weight: 400;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             font-style: italic;
         }
 
         .meta {
             font-size: 13px;
             color: #999;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .rss-link {
@@ -206,6 +206,16 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             gap: 3px;
         }
 
+        .meta-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .meta-item a:hover {
+            color: #667eea;
+        }
+
         footer {
             text-align: center;
             margin-top: 64px;
@@ -305,10 +315,11 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
         if (headline.hackernewsData) {
             const points = headline.hackernewsData.points || 0;
             const comments = headline.hackernewsData.commentCount || 0;
+            const hnUrl = headline.urls[1].url;
             metaHTML = `
                 <div class="story-meta">
                     <span class="meta-item">${points} points</span>
-                    <span class="meta-item">${comments} comments</span>
+                    <span class="meta-item"><a href="${hnUrl}" target="_blank" rel="noopener">${comments} comments</a></span>
                 </div>`;
         }
     } else {
@@ -330,7 +341,7 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
             metaHTML = `
                 <div class="story-meta">
                     <span class="meta-item">${points} points</span>
-                    <span class="meta-item">${comments} comments</span>
+                    <span class="meta-item"><a href="${url}" target="_blank" rel="noopener">${comments} comments</a></span>
                 </div>`;
         } else {
             badgeHTML = '<span class="badge tm">Techmeme</span>';

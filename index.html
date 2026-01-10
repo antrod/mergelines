@@ -28,8 +28,8 @@
 
         header {
             text-align: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #ddd;
         }
 
@@ -37,7 +37,7 @@
             font-size: 32px;
             font-weight: 700;
             letter-spacing: -0.02em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #111;
         }
 
@@ -45,14 +45,14 @@
             font-size: 16px;
             color: #666;
             font-weight: 400;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             font-style: italic;
         }
 
         .meta {
             font-size: 13px;
             color: #999;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .rss-link {
@@ -195,6 +195,16 @@
             gap: 3px;
         }
 
+        .meta-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .meta-item a:hover {
+            color: #667eea;
+        }
+
         footer {
             text-align: center;
             margin-top: 64px;
@@ -255,7 +265,7 @@
         <header>
             <h1>Mergelines</h1>
             <p class="subtitle">The best of Techmeme and Hacker News</p>
-            <p class="meta">Updated Jan 9, 2026, 7:47 PM</p>
+            <p class="meta">Updated Jan 10, 2026, 7:08 AM</p>
             <a href="/feed.xml" class="rss-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
@@ -265,9 +275,126 @@
         </header>
 
         <div class="stories">
-            <article class="story">
+            <article class="story featured">
                 <div class="story-header">
                     <span class="story-number">1</span>
+                    <span class="badge featured">🔥 Both Sites</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses" target="_blank" rel="noopener">Anthropic adds safeguards to prevent third-party apps, like OpenCode, from spoofing Claude Code to access Claude models for more favorable pricing and limits</a>
+                </h2>
+                <div class="story-summary">Anthropic has implemented new safeguards to prevent third-party applications, such as OpenCode, from spoofing its Claude Code interface, which could allow unauthorized access to Claude models at preferential pricing and limits. This move is significant as it aims to enhance security and maintain the integrity of its AI offerings.</div>
+                <div class="story-links">
+                    <a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses" class="story-link" target="_blank" rel="noopener">
+                        <span>📰</span> Techmeme
+                    </a>
+                    <a href="https://rushter.com/blog/zsh-shell/" class="story-link" target="_blank" rel="noopener">
+                        <span>🗨️</span> Hacker News
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">197 points</span>
+                    <span class="meta-item"><a href="https://rushter.com/blog/zsh-shell/" target="_blank" rel="noopener">0 comments</a></span>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">2</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve" target="_blank" rel="noopener">I got paid minimum wage to solve an impossible problem</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">14 points</span>
+                    <span class="meta-item"><a href="https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve" target="_blank" rel="noopener">0 comments</a></span>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">3</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://mediagazer.com/#a260109p14" target="_blank" rel="noopener">PBS says it is ending PBS News Weekend, due to federal budget cuts; anchor John Yang says he'll be leaving PBS but many members of the show's team will remain</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://mediagazer.com/#a260109p14" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">4</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf" target="_blank" rel="noopener">"We write to ask that you enforce your app stores' terms of service against X" [pdf]</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">13 points</span>
+                    <span class="meta-item"><a href="https://www.wyden.senate.gov/imo/media/doc/letter_to_apple_and_google_on_removing_x_and_grok_from_app_store_192026pdf.pdf" target="_blank" rel="noopener">0 comments</a></span>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">5</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/" target="_blank" rel="noopener">Documents: OpenAI is asking contractors to upload their work from current or previous jobs to evaluate its models, leaving it to them to scrub confidential info</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.wired.com/story/openai-contractor-upload-real-work-documents-ai-agents/" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">6</span>
+                    <span class="badge hn">Hacker News</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://nuxx.net/blog/2026/01/09/oled-not-for-me/" target="_blank" rel="noopener">OLED, Not for Me</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://nuxx.net/blog/2026/01/09/oled-not-for-me/" class="story-link" target="_blank" rel="noopener">
+                        Read Discussion →
+                    </a>
+                </div>
+                <div class="story-meta">
+                    <span class="meta-item">119 points</span>
+                    <span class="meta-item"><a href="https://nuxx.net/blog/2026/01/09/oled-not-for-me/" target="_blank" rel="noopener">0 comments</a></span>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">7</span>
+                    <span class="badge tm">Techmeme</span>
+                </div>
+                <h2 class="story-title">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge" target="_blank" rel="noopener">Chinese short-video app Kuaishou's stock has surged 88% over the past year, driven by the success of its Kling AI video generator, which has amassed 60M users</a>
+                </h2>
+                
+                <div class="story-links">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-05/ai-video-generation-leads-china-s-kuaishou-to-84-stock-surge" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>
+            </article>            <article class="story">
+                <div class="story-header">
+                    <span class="story-number">8</span>
                     <span class="badge hn">Hacker News</span>
                 </div>
                 <h2 class="story-title">
@@ -281,25 +408,25 @@
                 </div>
                 <div class="story-meta">
                     <span class="meta-item">10 points</span>
-                    <span class="meta-item">0 comments</span>
+                    <span class="meta-item"><a href="https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/" target="_blank" rel="noopener">0 comments</a></span>
                 </div>
             </article>            <article class="story">
                 <div class="story-header">
-                    <span class="story-number">2</span>
+                    <span class="story-number">9</span>
                     <span class="badge tm">Techmeme</span>
                 </div>
                 <h2 class="story-title">
-                    <a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses" target="_blank" rel="noopener">Anthropic adds safeguards to prevent third-party apps, like OpenCode, from spoofing Claude Code to access Claude models for more favorable pricing and limits</a>
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding" target="_blank" rel="noopener">Xreal co-founder and CEO Chi Xu says the smart glass maker, which has a $1B+ valuation, recently raised $100M from “supply chain partners” and other backers</a>
                 </h2>
                 
                 <div class="story-links">
-                    <a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses" class="story-link" target="_blank" rel="noopener">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-08/smart-glasses-pioneer-xreal-raises-100-million-in-new-funding" class="story-link" target="_blank" rel="noopener">
                         Read Article →
                     </a>
                 </div>
             </article>            <article class="story">
                 <div class="story-header">
-                    <span class="story-number">3</span>
+                    <span class="story-number">10</span>
                     <span class="badge hn">Hacker News</span>
                 </div>
                 <h2 class="story-title">
@@ -313,117 +440,7 @@
                 </div>
                 <div class="story-meta">
                     <span class="meta-item">7 points</span>
-                    <span class="meta-item">0 comments</span>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">4</span>
-                    <span class="badge tm">Techmeme</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews" target="_blank" rel="noopener">Google rolls out an AI Inbox view for Gmail that shows users to-dos and summaries of topics rather than a traditional email list, first for US “trusted testers”</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://www.theverge.com/news/857883/google-gmail-ai-inbox-overviews" class="story-link" target="_blank" rel="noopener">
-                        Read Article →
-                    </a>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">5</span>
-                    <span class="badge hn">Hacker News</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://www.nytimes.com/2026/01/09/arts/music/washington-national-opera-kennedy-center.html" target="_blank" rel="noopener">Washington National Opera Is Leaving the Kennedy Center</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://www.nytimes.com/2026/01/09/arts/music/washington-national-opera-kennedy-center.html" class="story-link" target="_blank" rel="noopener">
-                        Read Discussion →
-                    </a>
-                </div>
-                <div class="story-meta">
-                    <span class="meta-item">23 points</span>
-                    <span class="meta-item">0 comments</span>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">6</span>
-                    <span class="badge tm">Techmeme</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175" target="_blank" rel="noopener">Microsoft debuts Copilot Checkout in the US, enabling in-chat purchases via PayPal, Shopify, Stripe, and more; Shopify merchants will be automatically enrolled</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://searchengineland.com/microsoft-launches-copilot-checkout-and-brand-agents-467175" class="story-link" target="_blank" rel="noopener">
-                        Read Article →
-                    </a>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">7</span>
-                    <span class="badge hn">Hacker News</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://mathstodon.xyz/@tao/115855840223258103" target="_blank" rel="noopener">Erdos problem #728 was solved more or less autonomously by AI</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://mathstodon.xyz/@tao/115855840223258103" class="story-link" target="_blank" rel="noopener">
-                        Read Discussion →
-                    </a>
-                </div>
-                <div class="story-meta">
-                    <span class="meta-item">149 points</span>
-                    <span class="meta-item">0 comments</span>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">8</span>
-                    <span class="badge tm">Techmeme</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai" target="_blank" rel="noopener">OpenAI launches a HIPAA-compliant version of ChatGPT for clinicians to help with medical reasoning and reduce administrative work, at Cedars-Sinai and elsewhere</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-08/openai-anthropic-see-health-care-as-next-big-market-for-ai" class="story-link" target="_blank" rel="noopener">
-                        Read Article →
-                    </a>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">9</span>
-                    <span class="badge hn">Hacker News</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://mathstodon.xyz/@tao/115855840223258103" target="_blank" rel="noopener">AI solves Erdos problem #728 (Terence Tao mathstodon post)</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://mathstodon.xyz/@tao/115855840223258103" class="story-link" target="_blank" rel="noopener">
-                        Read Discussion →
-                    </a>
-                </div>
-                <div class="story-meta">
-                    <span class="meta-item">80 points</span>
-                    <span class="meta-item">0 comments</span>
-                </div>
-            </article>            <article class="story">
-                <div class="story-header">
-                    <span class="story-number">10</span>
-                    <span class="badge tm">Techmeme</span>
-                </div>
-                <h2 class="story-title">
-                    <a href="https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&reflink=desktopwebshare_permalink" target="_blank" rel="noopener">Nvidia has hired Google Cloud VP of Marketing Alison Wagonfeld to be Nvidia's first CMO, starting in February; source: Wagonfeld will report to CEO Jensen Huang</a>
-                </h2>
-                
-                <div class="story-links">
-                    <a href="https://www.wsj.com/articles/nvidia-hires-google-veteran-as-its-first-chief-marketing-officer-3dc2163f?st=trauby&reflink=desktopwebshare_permalink" class="story-link" target="_blank" rel="noopener">
-                        Read Article →
-                    </a>
+                    <span class="meta-item"><a href="https://lcamtuf.substack.com/p/see-it-with-your-lying-ears" target="_blank" rel="noopener">0 comments</a></span>
                 </div>
             </article>
         </div>
