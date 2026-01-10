@@ -70,7 +70,7 @@ function isSameStory(h1: { title: string; url: string }, h2: { title: string; ur
 }
 
 // Convert StoredHeadline to Headline
-function storedToHeadline(stored: StoredHeadline): Headline {
+function storedToHeadline(stored: any): Headline {
   return {
     title: stored.title,
     url: stored.url,
@@ -78,7 +78,7 @@ function storedToHeadline(stored: StoredHeadline): Headline {
     timestamp: new Date(stored.timestamp),
     popularity: stored.popularity,
     points: stored.points || undefined,
-    commentCount: stored.commentCount || undefined,
+    commentCount: stored.comment_count || undefined, // Database uses snake_case
   };
 }
 

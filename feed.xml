@@ -4,9 +4,9 @@
         <description><![CDATA[Top tech stories from Techmeme and Hacker News, featuring cross-platform matches]]></description>
         <link>https://yoursite.com</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 10 Jan 2026 12:08:04 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 10 Jan 2026 12:11:39 GMT</lastBuildDate>
         <atom:link href="https://yoursite.com/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sat, 10 Jan 2026 12:08:04 GMT</pubDate>
+        <pubDate>Sat, 10 Jan 2026 12:11:39 GMT</pubDate>
         <language><![CDATA[en]]></language>
         <ttl>60</ttl>
         <item>
@@ -17,7 +17,7 @@
         <p><strong>Sources:</strong></p>
         <ul>
           <li><a href="https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses">Techmeme</a></li>
-          <li><a href="https://rushter.com/blog/zsh-shell/">Hacker News</a> (197 points, 0 comments)</li>
+          <li><a href="https://rushter.com/blog/zsh-shell/">Hacker News</a> (197 points, 197 comments)</li>
         </ul>
       ]]></description>
             <link>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</link>
@@ -26,13 +26,13 @@
             <techmeme:url>https://venturebeat.com/technology/anthropic-cracks-down-on-unauthorized-claude-usage-by-third-party-harnesses</techmeme:url>
             <hn:url>https://rushter.com/blog/zsh-shell/</hn:url>
             <hn:points>197</hn:points>
-            <hn:comments>0</hn:comments>
+            <hn:comments>197</hn:comments>
         </item>
         <item>
             <title><![CDATA[I got paid minimum wage to solve an impossible problem]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>14 points • 0 comments</p>
+          <p>14 points • 2 comments</p>
           <p><a href="https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve">Read on Hacker News</a></p>
         ]]></description>
             <link>https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve</link>
@@ -40,7 +40,7 @@
             <pubDate>Sat, 10 Jan 2026 10:53:28 GMT</pubDate>
             <hn:url>https://tiespetersen.substack.com/p/i-got-paid-minimum-wage-to-solve</hn:url>
             <hn:points>14</hn:points>
-            <hn:comments>0</hn:comments>
+            <hn:comments>2</hn:comments>
         </item>
         <item>
             <title><![CDATA[PBS says it is ending PBS News Weekend, due to federal budget cuts; anchor John Yang says he'll be leaving PBS but many members of the show's team will remain]]></title>
@@ -82,7 +82,7 @@
             <title><![CDATA[OLED, Not for Me]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>119 points • 0 comments</p>
+          <p>119 points • 121 comments</p>
           <p><a href="https://nuxx.net/blog/2026/01/09/oled-not-for-me/">Read on Hacker News</a></p>
         ]]></description>
             <link>https://nuxx.net/blog/2026/01/09/oled-not-for-me/</link>
@@ -90,7 +90,7 @@
             <pubDate>Sat, 10 Jan 2026 03:52:48 GMT</pubDate>
             <hn:url>https://nuxx.net/blog/2026/01/09/oled-not-for-me/</hn:url>
             <hn:points>119</hn:points>
-            <hn:comments>0</hn:comments>
+            <hn:comments>121</hn:comments>
         </item>
         <item>
             <title><![CDATA[Chinese short-video app Kuaishou's stock has surged 88% over the past year, driven by the success of its Kling AI video generator, which has amassed 60M users]]></title>
@@ -107,7 +107,7 @@
             <title><![CDATA[Caltrain shows why every region should be moving toward regional rail]]></title>
             <description><![CDATA[
           <p><strong>From Hacker News</strong></p>
-          <p>10 points • 0 comments</p>
+          <p>10 points • 2 comments</p>
           <p><a href="https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/">Read on Hacker News</a></p>
         ]]></description>
             <link>https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/</link>
@@ -115,7 +115,7 @@
             <pubDate>Sat, 10 Jan 2026 00:25:29 GMT</pubDate>
             <hn:url>https://www.hsrail.org/blog/caltrain-shows-why-every-region-should-be-moving-toward-regional-rail/</hn:url>
             <hn:points>10</hn:points>
-            <hn:comments>0</hn:comments>
+            <hn:comments>2</hn:comments>
         </item>
         <item>
             <title><![CDATA[Xreal co-founder and CEO Chi Xu says the smart glass maker, which has a $1B+ valuation, recently raised $100M from “supply chain partners” and other backers]]></title>
