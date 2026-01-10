@@ -24,31 +24,31 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #f5f5f7 0%, #ffffff 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 24px 20px;
             color: #1d1d1f;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 980px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 56px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -56,62 +56,64 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .subtitle {
-            font-size: 21px;
+            font-size: 17px;
             color: #86868b;
             font-weight: 400;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         .meta {
-            font-size: 14px;
+            font-size: 13px;
             color: #86868b;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .rss-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 6px 12px;
             background: rgba(0, 0, 0, 0.04);
-            border-radius: 20px;
+            border-radius: 16px;
             text-decoration: none;
             color: #1d1d1f;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .rss-link:hover {
             background: rgba(0, 0, 0, 0.08);
-            transform: translateY(-1px);
         }
 
         .stories {
             display: grid;
-            gap: 20px;
+            gap: 4px;
         }
 
         .story {
             background: white;
-            border-radius: 18px;
-            padding: 32px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.2s ease;
             position: relative;
-            overflow: hidden;
+        }
+
+        .story:last-child {
+            border-bottom: none;
         }
 
         .story::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            left: -20px;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .story.featured::before {
@@ -119,33 +121,33 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .story:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: rgba(0, 0, 0, 0.01);
         }
 
         .story-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .story-number {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #86868b;
-            min-width: 28px;
+            min-width: 24px;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
+            text-transform: uppercase;
         }
 
         .badge.featured {
@@ -164,17 +166,17 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .story-title {
-            font-size: 21px;
+            font-size: 18px;
             font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 16px;
+            line-height: 1.35;
+            margin-bottom: 10px;
             color: #1d1d1f;
         }
 
         .story-title a {
             color: inherit;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.15s ease;
         }
 
         .story-title a:hover {
@@ -182,35 +184,35 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .story-summary {
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 14px;
+            line-height: 1.5;
             color: #515154;
-            margin-bottom: 16px;
-            padding: 16px;
+            margin-bottom: 10px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.02);
-            border-radius: 12px;
-            border-left: 3px solid #667eea;
+            border-radius: 8px;
+            border-left: 2px solid #667eea;
         }
 
         .story-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .story-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
+            gap: 4px;
+            padding: 4px 10px;
             background: rgba(0, 0, 0, 0.04);
-            border-radius: 12px;
+            border-radius: 10px;
             text-decoration: none;
             color: #1d1d1f;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
 
         .story-link:hover {
@@ -220,41 +222,41 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         .story-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            font-size: 13px;
+            gap: 12px;
+            font-size: 12px;
             color: #86868b;
         }
 
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
         footer {
             text-align: center;
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             color: #86868b;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 40px;
+                font-size: 32px;
             }
 
             .subtitle {
-                font-size: 18px;
+                font-size: 15px;
             }
 
             .story {
-                padding: 24px;
+                padding: 16px 0;
             }
 
             .story-title {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
