@@ -28,8 +28,5 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 
-# Database
-*.db
-*.db-journal
-
 # RSS Feed - keep feed.xml in repo for GitHub Pages
+# Database - keep mergelines.db in repo for persistence across Actions runs
