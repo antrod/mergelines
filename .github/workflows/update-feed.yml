@@ -44,10 +44,35 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Fetch latest changes and try to merge them
+          git fetch origin main
+
+          # Stash our changes
           git add mergelines.db feed.xml index.html
-          git diff --staged --quiet || git commit -m "Update feed and database - $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git pull --rebase origin main
-          git push
+          git stash
+
+          # Reset to latest origin/main
+          git reset --hard origin/main
+
+          # Re-apply our changes
+          git stash pop || true
+
+          # Commit if there are changes
+          git add mergelines.db feed.xml index.html
+          if ! git diff --staged --quiet; then
+            git commit -m "Update feed and database - $(date -u '+%Y-%m-%d %H:%M UTC')"
+            # Try to push, retry up to 3 times with delay if it fails
+            for i in 1 2 3; do
+              if git push; then
+                break
+              fi
+              echo "Push failed, retrying in 5 seconds..."
+              sleep 5
+              git fetch origin main
+              git rebase origin/main || git rebase --skip
+            done
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
