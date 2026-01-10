@@ -46,6 +46,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add mergelines.db feed.xml index.html
           git diff --staged --quiet || git commit -m "Update feed and database - $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main
           git push
 
       - name: Setup Pages
