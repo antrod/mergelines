@@ -45,22 +45,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Save generated files temporarily (they're needed for deployment)
-          cp feed.xml feed.xml.tmp
-          cp index.html index.html.tmp
+          # Stash ALL changes (database + generated files)
+          git add -A
+          git stash
 
           # Fetch and sync with latest
           git fetch origin main
-          git pull --rebase origin/main || git rebase --abort
+          git reset --hard origin/main
 
-          # Restore generated files (don't commit them, just keep in working dir for deployment)
-          mv feed.xml.tmp feed.xml
-          mv index.html.tmp index.html
+          # Restore only the database from stash
+          git stash pop || echo "No stash to pop"
+          git checkout --theirs feed.xml index.html 2>/dev/null || echo "No conflicts in feed/html"
 
-          # Commit only the database
+          # Commit only the database if it changed
           git add mergelines.db
 
-          # Commit if database changed
           if ! git diff --staged --quiet; then
             git commit -m "Update database - $(date -u '+%Y-%m-%d %H:%M UTC')"
             # Try to push
@@ -71,11 +70,17 @@ jobs:
               fi
               echo "Push failed, retrying in 5 seconds..."
               sleep 5
-              git pull --rebase origin/main || git rebase --abort
+              git fetch origin main
+              git reset --hard origin/main
+              git add mergelines.db
+              git commit -m "Update database - $(date -u '+%Y-%m-%d %H:%M UTC')" || true
             done
           else
             echo "No database changes to commit"
           fi
+
+          # Regenerate feed and html with latest code (ensure they're clean)
+          npm run dev
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
