@@ -8,7 +8,7 @@ export interface StoredHeadline {
   id: number;
   title: string;
   url: string;
-  source: 'techmeme' | 'hackernews';
+  source: 'techmeme' | 'hackernews' | '9to5mac';
   timestamp: number;
   popularity: number;
   points?: number;
@@ -128,7 +128,7 @@ class MergelinesDB {
   }
 
   // Get headlines within time window (in hours)
-  getHeadlinesInWindow(hoursAgo: number, source?: 'techmeme' | 'hackernews'): StoredHeadline[] {
+  getHeadlinesInWindow(hoursAgo: number, source?: 'techmeme' | 'hackernews' | '9to5mac'): StoredHeadline[] {
     const cutoffTime = Date.now() - (hoursAgo * 60 * 60 * 1000);
 
     let query = 'SELECT * FROM headlines WHERE timestamp >= ?';

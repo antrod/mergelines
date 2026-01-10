@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import * as dotenv from 'dotenv';
 import { scrapeTechmeme } from './scrapers/techmeme';
 import { scrapeHackerNews } from './scrapers/hackernews';
+import { scrape9to5Mac } from './scrapers/9to5mac';
 import { storeAndMatchHeadlines } from './persistence-merger';
 import { writeRSSFeed, getRSSFeedPath } from './rss';
 import { generateHTML } from './html-generator';
@@ -14,17 +15,19 @@ const TIME_WINDOW_HOURS = 12;
 
 async function main() {
   console.log(chalk.bold.cyan('\n🔄 Mergelines - Tech News Aggregator\n'));
-  console.log(chalk.gray('Fetching headlines from Techmeme and Hacker News...\n'));
+  console.log(chalk.gray('Fetching headlines from Techmeme, Hacker News, and 9to5Mac...\n'));
 
   try {
     // Fetch headlines in parallel
-    const [techmemeHeadlines, hnHeadlines] = await Promise.all([
+    const [techmemeHeadlines, hnHeadlines, nineToFiveMacHeadlines] = await Promise.all([
       scrapeTechmeme(),
-      scrapeHackerNews()
+      scrapeHackerNews(),
+      scrape9to5Mac()
     ]);
 
     console.log(chalk.green(`✓ Fetched ${techmemeHeadlines.length} headlines from Techmeme`));
-    console.log(chalk.green(`✓ Fetched ${hnHeadlines.length} headlines from Hacker News\n`));
+    console.log(chalk.green(`✓ Fetched ${hnHeadlines.length} headlines from Hacker News`));
+    console.log(chalk.green(`✓ Fetched ${nineToFiveMacHeadlines.length} headlines from 9to5Mac\n`));
 
     // Check if OpenAI API key is available
     const useAI = !!process.env.OPENAI_API_KEY;
@@ -39,14 +42,15 @@ async function main() {
     const { stored, newMatches, allMerged: mergedHeadlines } = await storeAndMatchHeadlines(
       techmemeHeadlines,
       hnHeadlines,
+      nineToFiveMacHeadlines,
       TIME_WINDOW_HOURS
     );
 
-    console.log(chalk.green(`✓ Stored ${stored.techmeme} Techmeme + ${stored.hackernews} HN headlines`));
+    console.log(chalk.green(`✓ Stored ${stored.techmeme} Techmeme + ${stored.hackernews} HN + ${stored.nineToFiveMac} 9to5Mac headlines`));
     if (newMatches > 0) {
-      console.log(chalk.bold.green(`🎉 Found ${newMatches} new cross-platform ${newMatches === 1 ? 'story' : 'stories'}!\n`));
+      console.log(chalk.bold.green(`🎉 Found ${newMatches} new cross-source ${newMatches === 1 ? 'story' : 'stories'}!\n`));
     } else {
-      console.log(chalk.gray(`No new cross-platform stories found.\n`));
+      console.log(chalk.gray(`No new cross-source stories found.\n`));
     }
 
     // Generate RSS feed and HTML page (always, with top 10 stories)
@@ -65,7 +69,7 @@ async function main() {
     mergedHeadlines.forEach((headline, index) => {
       const rank = index + 1;
       const badge = headline.inBothSites
-        ? chalk.bold.red('🔥 BOTH')
+        ? chalk.bold.red(`🔥 ${headline.urls.length} SOURCES`)
         : chalk.gray(`[${headline.urls[0].source}]`);
 
       console.log(chalk.bold(`${rank}. ${badge}`));
@@ -73,7 +77,11 @@ async function main() {
 
       // Show sources
       headline.urls.forEach(urlInfo => {
-        const sourceColor = urlInfo.source === 'Techmeme' ? chalk.blue : chalk.yellow;
+        let sourceColor = chalk.gray;
+        if (urlInfo.source === 'Techmeme') sourceColor = chalk.blue;
+        else if (urlInfo.source === 'Hacker News') sourceColor = chalk.yellow;
+        else if (urlInfo.source === '9to5Mac') sourceColor = chalk.magenta;
+
         console.log(sourceColor(`   ${urlInfo.source}: ${urlInfo.url}`));
       });
 
@@ -83,7 +91,10 @@ async function main() {
         metrics.push(chalk.yellow(`${headline.hackernewsData.points} pts`));
       }
       if (headline.hackernewsData?.commentCount) {
-        metrics.push(chalk.gray(`${headline.hackernewsData.commentCount} comments`));
+        metrics.push(chalk.gray(`HN: ${headline.hackernewsData.commentCount} comments`));
+      }
+      if (headline.nineToFiveMacData?.commentCount) {
+        metrics.push(chalk.magenta(`9to5Mac: ${headline.nineToFiveMacData.commentCount} comments`));
       }
       if (metrics.length > 0) {
         console.log(`   ${metrics.join(' • ')}`);
@@ -95,7 +106,7 @@ async function main() {
 
     console.log(chalk.gray('─'.repeat(80)));
     console.log(chalk.cyan(`\n✨ Total: ${mergedHeadlines.length} headlines`));
-    console.log(chalk.cyan(`   ${mergedHeadlines.filter(h => h.inBothSites).length} stories on both sites`));
+    console.log(chalk.cyan(`   ${mergedHeadlines.filter(h => h.inBothSites).length} stories in 2+ sources`));
     console.log(chalk.gray(`   (within ${TIME_WINDOW_HOURS}-hour window)\n`));
 
   } catch (error) {
