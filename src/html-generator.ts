@@ -160,6 +160,11 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             color: #007aff;
         }
 
+        .badge.mac {
+            background: #f3e5ff;
+            color: #9c27b0;
+        }
+
         .story-title {
             font-size: 17px;
             font-weight: 400;
@@ -266,7 +271,7 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
     <div class="container">
         <header>
             <h1>Mergelines</h1>
-            <p class="subtitle">The best of Techmeme and Hacker News</p>
+            <p class="subtitle">The best of Techmeme, Hacker News, and 9to5Mac</p>
             <p class="meta">Updated ${now.toLocaleString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -292,7 +297,9 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
     let metaHTML = '';
 
     if (headline.inBothSites) {
-        badgeHTML = '<span class="badge featured">🔥 Both Sites</span>';
+        // Count unique sources, not total URLs
+        const uniqueSources = new Set(headline.urls.map(u => u.source)).size;
+        badgeHTML = `<span class="badge featured">🔥 ${uniqueSources} Sources</span>`;
 
         // Get AI summary
         const db = getDB();
@@ -344,6 +351,23 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
                     <span class="meta-item">${points} points</span>
                     <span class="meta-item"><a href="${hnDiscussionUrl}" target="_blank" rel="noopener">${comments} comments</a></span>
                 </div>`;
+        } else if (source === '9to5Mac') {
+            badgeHTML = '<span class="badge mac">9to5Mac</span>';
+            const comments = headline.nineToFiveMacData?.commentCount || 0;
+
+            linksHTML = `
+                <div class="story-links">
+                    <a href="${url}" class="story-link" target="_blank" rel="noopener">
+                        Read Article →
+                    </a>
+                </div>`;
+
+            if (comments > 0) {
+                metaHTML = `
+                    <div class="story-meta">
+                        <span class="meta-item">${comments} comments</span>
+                    </div>`;
+            }
         } else {
             badgeHTML = '<span class="badge tm">Techmeme</span>';
             linksHTML = `
@@ -369,7 +393,7 @@ ${(await Promise.all(topHeadlines.map(async (headline, index) => {
         </div>
 
         <footer>
-            <p>Mergelines aggregates the top stories from Techmeme and Hacker News</p>
+            <p>Mergelines aggregates the top stories from Techmeme, Hacker News, and 9to5Mac</p>
             <p style="margin-top: 8px; opacity: 0.7;">Updates hourly • <a href="https://antrod.github.io/mergelines/feed.xml" style="color: inherit;">RSS Feed</a></p>
         </footer>
     </div>

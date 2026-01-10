@@ -232,7 +232,6 @@ export async function storeAndMatchHeadlines(
 
     // Find all matching headlines (including from other sources in window)
     const matches: StoredHeadline[] = [fresh];
-    processed.add(fresh.id);
 
     for (const other of [...techmemeInWindow, ...hnInWindow, ...nineToFiveMacInWindow]) {
       if (processed.has(other.id)) continue;
@@ -244,8 +243,12 @@ export async function storeAndMatchHeadlines(
       }
     }
 
-    // Add to merged list if matches 2+ sources or is a fresh headline
+    // Add to merged list if matches 2+ sources
     if (matches.length >= 2) {
+      // Mark all matched headlines as processed
+      for (const match of matches) {
+        processed.add(match.id);
+      }
       merged.push(createMergedHeadline(matches));
     }
   }

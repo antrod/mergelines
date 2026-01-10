@@ -68,8 +68,10 @@ async function main() {
     // Display results
     mergedHeadlines.forEach((headline, index) => {
       const rank = index + 1;
+      // Count unique sources, not total URLs
+      const uniqueSources = new Set(headline.urls.map(u => u.source)).size;
       const badge = headline.inBothSites
-        ? chalk.bold.red(`🔥 ${headline.urls.length} SOURCES`)
+        ? chalk.bold.red(`🔥 ${uniqueSources} SOURCES`)
         : chalk.gray(`[${headline.urls[0].source}]`);
 
       console.log(chalk.bold(`${rank}. ${badge}`));
