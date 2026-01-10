@@ -71,10 +71,10 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
             align-items: center;
             gap: 6px;
             padding: 6px 14px;
-            background: #f5f5f5;
+            background: #e3f2fd;
             border-radius: 4px;
             text-decoration: none;
-            color: #111;
+            color: #1565c0;
             font-size: 13px;
             font-weight: 400;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -82,7 +82,7 @@ export async function generateHTML(mergedHeadlines: MergedHeadline[]): Promise<v
         }
 
         .rss-link:hover {
-            background: #e5e5e5;
+            background: #bbdefb;
         }
 
         .stories {
